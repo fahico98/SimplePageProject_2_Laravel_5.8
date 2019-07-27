@@ -87,13 +87,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="e_mail" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="e_mail" type="email" class="form-control @error('e_mail') is-invalid @enderror"
+                                    name="e_mail" value="{{ old('e_mail') }}" required autocomplete="e_mail">
 
-                                @error('email')
+                                @error('e_mail')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

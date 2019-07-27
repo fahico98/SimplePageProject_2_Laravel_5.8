@@ -15,7 +15,7 @@ class User extends Authenticatable{
     *
     * @var array
     */
-   protected $fillable = ['name', "lastname", "country", "city", "phone_number", 'email', 'password'];
+   protected $fillable = ['name', "lastname", "country", "city", "phone_number", 'e_mail', 'password'];
 
    /**
     * The attributes that should be hidden for arrays.
@@ -30,4 +30,12 @@ class User extends Authenticatable{
     * @var array
     */
    protected $casts = ['email_verified_at' => 'datetime'];
+
+   public function role(){
+      return $this->belongsTo("App/Role");
+   }
+
+   public function isAdmin(){
+      return ($this->role->role_type == "aministrator") ? true : false ;
+   }
 }
