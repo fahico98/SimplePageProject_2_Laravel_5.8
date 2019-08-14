@@ -9,6 +9,10 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+         <!-- Font Awesome CSS -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+            integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
         <!-- Styles -->
         <style>
             html, body {
@@ -80,20 +84,21 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+               <div class="title m-b-md">
+                  Simple Page Project 2.0
+               </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+               <div class="links">
+                  <a href="https://laravel.com/docs">Docs</a>
+                  <a href="https://laracasts.com">Laracasts</a>
+                  <a href="https://laravel-news.com">News</a>
+                  <a href="https://blog.laravel.com">Blog</a>
+                  <a href="https://nova.laravel.com">Nova</a>
+                  <a href="https://forge.laravel.com">Forge</a>
+                  <a href="https://github.com/laravel/laravel">GitHub</a>
+               </div>
             </div>
+
         </div>
     </body>
 </html>

@@ -41,7 +41,7 @@ Route::get('/', function () {
  * $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
  * $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
  *
- * To create the Email Verification Routes you must use "Auth::routes(['verify' => true]);".
+ * To create the Email Verification Routes you must use "Auth::routes(['verify' => true])"...
  * $this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
  * $this->get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
  * $this->get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
@@ -49,3 +49,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/ageDenied', 'HomeController@ageDenied')->name('ageDenied');

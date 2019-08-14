@@ -51,17 +51,17 @@ class Kernel extends HttpKernel{
     * @var array
     */
    protected $routeMiddleware = [
-      'auth' => \simplePageProject_2\Http\Middleware\Authenticate::class,
-      'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-      'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-      'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-      'can' => \Illuminate\Auth\Middleware\Authorize::class,
-      'guest' => \simplePageProject_2\Http\Middleware\RedirectIfAuthenticated::class,
-      'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-      'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-      'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-      "role" => \simplePageProject_2\Http\Middleware\RoleMiddleware::class,
-      "isAdmin" => \simplePageProject_2\Http\Middleware\IsAdminMiddleware::class
+      'auth'               => \simplePageProject_2\Http\Middleware\Authenticate::class,
+      'auth.basic'         => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+      'bindings'           => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+      'cache.headers'      => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+      'can'                => \Illuminate\Auth\Middleware\Authorize::class,
+      'guest'              => \simplePageProject_2\Http\Middleware\RedirectIfAuthenticated::class,
+      'signed'             => \Illuminate\Routing\Middleware\ValidateSignature::class,
+      'throttle'           => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+      'verified'           => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+      "role"               => \simplePageProject_2\Http\Middleware\RoleMiddleware::class,
+      "isAdmin"            => \simplePageProject_2\Http\Middleware\IsAdminMiddleware::class
    ];
 
    /**
