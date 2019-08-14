@@ -12,7 +12,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                     You are logged {{ $user->name }}!
+                     You are logged {{ $user->name }}...!
                 </div>
             </div>
         </div>
