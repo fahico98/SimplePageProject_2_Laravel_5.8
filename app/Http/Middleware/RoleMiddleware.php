@@ -14,7 +14,7 @@ class RoleMiddleware{
     * @return mixed
     */
    public function handle($request, Closure $next){
-      return redirec("/home");
+      return redirec("/");
       //return $next($request);
    }
 }

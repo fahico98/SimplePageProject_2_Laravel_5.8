@@ -26,7 +26,9 @@ class HomeController extends Controller{
       return view('home', compact("user"));
    }
 
+   /*
    public function ageDenied(){
       return view("ageDenied");
    }
+   */
 }
