@@ -32,10 +32,10 @@ class User extends Authenticatable{
    protected $casts = ['email_verified_at' => 'datetime'];
 
    public function role(){
-      return $this->belongsTo("App/Role");
+      return $this->belongsTo("simplePageProject_2\Role");
    }
 
    public function isAdmin(){
-      return ($this->role->role_type == "aministrator") ? true : false ;
+      return $this->role->role_name === "administrator";
    }
 }

@@ -23,6 +23,10 @@ class HomeController extends Controller{
     */
    public function index(){
       $user = Auth::user();
-      return view('home', compact("user"));
+      if($user->isAdmin()){
+         return view('auth.admin', compact("user"));
+      }else{
+         return view('home', compact("user"));
+      }
    }
 }

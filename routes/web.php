@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,15 +14,18 @@
 */
 
 Route::get('/', function () {
-   /*
-   $user = Auth::user();
-   if($user->isAdmin()){
-      //
+   if(Auth::check()){
+      $user = Auth::user();
+      if($user->isAdmin()){
+         return view("auth.admin", compact("user"));
+         //echo("You are admin " . $user->name);
+      }else{
+         return view('home', compact("user"));
+         //echo("You are not admin " . $user->name);
+      }
    }else{
-      //
+      return view('welcome');
    }
-   */
-   return view('welcome');
 });
 
 /**

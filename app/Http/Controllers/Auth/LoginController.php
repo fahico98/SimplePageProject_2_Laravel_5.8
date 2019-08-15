@@ -35,4 +35,12 @@ class LoginController extends Controller{
    public function __construct(){
       $this->middleware('guest')->except('logout');
    }
+
+   /**
+    * This method has been overwritten of the original "username()" method in the
+    * "Illuminate\Foundation\Auth\AuthenticatesUsers" trait.
+    */
+   public function username(){
+      return 'e_mail';
+   }
 }
