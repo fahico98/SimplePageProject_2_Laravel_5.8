@@ -5,8 +5,8 @@
    <div class="row justify-content-center">
       <div class="col-md-8">
          <div class="card">
-            <div class="card-header">{{ "Admin Panel" }}</div>
-            <div class="card-body">You are admin {{ $user->name }}, you have control...!</div>
+            <div class="card-header">Admin Panel</div>
+            <div class="card-body">You are admin, got have everything under control...!</div>
          </div>
       </div>
    </div>

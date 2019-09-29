@@ -3,7 +3,7 @@
 namespace simplePageProject_2\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // (*)
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller{
 
@@ -23,10 +23,6 @@ class HomeController extends Controller{
     */
    public function index(){
       $user = Auth::user();
-      if($user->isAdmin()){
-         return view('auth.admin', compact("user"));
-      }else{
-         return view('home', compact("user"));
-      }
+      return view('home', compact("user"));
    }
 }

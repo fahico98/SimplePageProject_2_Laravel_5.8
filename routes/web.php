@@ -13,20 +13,36 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+Route::get("/", function(){
    if(Auth::check()){
       $user = Auth::user();
       if($user->isAdmin()){
-         return view("auth.admin", compact("user"));
-         //echo("You are admin " . $user->name);
-      }else{
-         return view('home', compact("user"));
-         //echo("You are not admin " . $user->name);
+         echo("You are admin $user->name...!");
       }
+      return view('welcome');
    }else{
       return view('welcome');
    }
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+Route::group(["middleware" => "web"], function(){
+
+   Route::get('/', function(){
+      return view('welcome');
+   });
+
+   Auth::routes();
+   Route::get('/home', 'HomeController@index')->name('home');
+   Route::get("/admins/login", "AdministratorsController@showLoginForm");
+   Route::post("/admins/login", "AdministratorsController@login")->name('adminsLogin');
+   Route::get("/admins/area", "AdministratorsController@secret");
+});
+*/
 
 /**
  * Auth::routes() will create the followiing routes.
@@ -51,6 +67,3 @@ Route::get('/', function () {
  * $this->get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
  * $this->get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
  */
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
