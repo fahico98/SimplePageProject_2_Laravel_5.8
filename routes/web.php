@@ -14,20 +14,17 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get("/", function(){
-   if(Auth::check()){
-      $user = Auth::user();
-      if($user->isAdmin()){
-         echo("You are admin $user->name...!");
-      }
-      return view('welcome');
-   }else{
-      return view('welcome');
+   if(Auth::check() && Auth::user()->isAdmin()){
+      echo("You are admin " . Auth::user()->name . "...!");
    }
+   return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get("/admin", "AdministratorController@index");
 
 /*
 Route::group(["middleware" => "web"], function(){
