@@ -3,10 +3,15 @@
 namespace simplePageProject_2\Http\Controllers\Auth;
 
 use simplePageProject_2\User;
+use simplePageProject_2\Mail\ReportMail;
 use simplePageProject_2\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller{
 
@@ -40,6 +45,20 @@ class RegisterController extends Controller{
    }
 
    /**
+    * Handle a registration request for the application.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function register(Request $request){
+      $this->validator($request->all())->validate();
+      event(new Registered($user = $this->create($request->all())));
+      $this->guard()->login($user);
+      Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
+      return $this->registered($request, $user) ?: redirect($this->redirectPath());
+   }
+
+   /**
     * Get a validator for an incoming registration request.
     *
     * @param  array  $data
@@ -53,7 +72,7 @@ class RegisterController extends Controller{
          "city" => ["required", "string", "max:100"],
          "phone_number" => ["required", "string", "numeric", "unique:users"],
          'e_mail' => ['required', "email", 'max:50', 'unique:users'],
-         'password' => ['required', 'string', 'min:8', 'confirmed']
+         'password' => ['required', 'string', 'min:8', 'confirmed'],
       ]);
    }
 
@@ -71,7 +90,8 @@ class RegisterController extends Controller{
          "city" => $data["city"],
          "phone_number" => $data["phone_number"],
          "e_mail" => $data["e_mail"],
-         "password" => Hash::make($data['password'])
+         "password" => Hash::make($data['password']),
+         "role_id" => 3
       ]);
    }
 }

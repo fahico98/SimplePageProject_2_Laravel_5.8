@@ -19,10 +19,21 @@ class HomeController extends Controller{
    /**
     * Show the application dashboard.
     *
+    *
+    *
     * @return \Illuminate\Contracts\Support\Renderable
     */
-   public function index(){
+   public function index(Request $request){
+
+      // Adding session data via Request instance...
+      //$request->session()->put([$user->name => $user->role->role_name]);
+
+      // Adding session data via session global helper...
+      //session([$user->name => $user->role->role_name]);
+
+      //var_dump($request->session()->all());
+
       $user = Auth::user();
-      return view('home', compact("user"));
+      return view("home", compact("user"));
    }
 }

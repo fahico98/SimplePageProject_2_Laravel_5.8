@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get("/", function(){
-   if(Auth::check() && Auth::user()->isAdmin()){
-      echo("You are admin " . Auth::user()->name . "...!");
+   if(Auth::check()){
+      if(Auth::user()->isAdmin()){
+         echo("You are admin " . Auth::user()->name . "...!");
+      }
    }
    return view('welcome');
 });

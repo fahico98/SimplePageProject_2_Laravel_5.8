@@ -4,6 +4,7 @@ namespace simplePageProject_2;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable{
@@ -15,7 +16,7 @@ class User extends Authenticatable{
     *
     * @var array
     */
-   protected $fillable = ['name', "lastname", "country", "city", "phone_number", 'e_mail', 'password'];
+   protected $fillable = ['name', "lastname", "country", "city", "phone_number", 'e_mail', 'password', "role_id"];
 
    /**
     * The attributes that should be hidden for arrays.
