@@ -10,7 +10,13 @@ class AdministratorController extends Controller{
       $this->middleware("isAdmin");
    }
 
+   public function userSearch(){
+      return view("administrators.userSearch");
+   }
+
+   /*
    public function index(){
       return "Si has llegado hasta aquí entonces eres administrador...!";
    }
+   */
 }

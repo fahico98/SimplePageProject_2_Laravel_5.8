@@ -1,0 +1,28 @@
+
+@extends('layouts.app')
+
+@section('content')
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col-md-8">
+            <div class="card">
+               <div class="card-header">{{ __('User Search') }}</div>
+               <div class="card-body">
+                  <div class="form-group mb-3">
+                     <label for="tableSearchSelector">User Role</label>
+                     <select class="form-control" id="tableSearchSelector">
+                        <option value="costumer" selected>Costumers</option>
+                        <option value="seller">Sellers</option>
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label for="searchInput">Name</label>
+                     <input type="text" class="form-control" id="searchInput">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script src="{{ asset('js/userSearch.js') }}" defer></script>
+@endsection

@@ -15,11 +15,6 @@ class IsAdmin{
     * @return mixed
     */
    public function handle($request, Closure $next){
-      if(Auth::check()){
-         if(!Auth::user()->isAdmin()){
-            return redirect("/");
-         }
-      }
-      return $next($request);
+      return (Auth::check() && Auth::user()->isAdmin()) ? $next($request) : redirect("/home");
    }
 }

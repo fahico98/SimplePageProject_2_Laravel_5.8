@@ -33,7 +33,13 @@ class HomeController extends Controller{
 
       //var_dump($request->session()->all());
 
-      $user = Auth::user();
-      return view("home", compact("user"));
+      if(Auth::check()){
+         $user = Auth::user();
+         if(Auth::user()->isAdmin()){
+            return view("administrators.admin", compact("user"));
+         }else{
+            return view("home", compact("user"));
+         }
+      }
    }
 }

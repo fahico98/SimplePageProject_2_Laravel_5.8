@@ -6,7 +6,10 @@
       <div class="col-md-8">
          <div class="card">
             <div class="card-header">Admin Panel</div>
-            <div class="card-body">You are admin, got have everything under control...!</div>
+            <div class="card-body">
+               You are admin {{ $user->name }}, got have everything under control...!<br>
+               Now you can access the <a href="{{ route('user_search') }}">user search</a>.
+            </div>
          </div>
       </div>
    </div>
