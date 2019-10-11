@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get("/user_search", "AdministratorController@userSearch")->name("user_search");
+Route::post("/user_search_ajax", "AdministratorController@userSearchAjax");
 
 //Route::get("/admin", "AdministratorController@index")->name("admin");
 

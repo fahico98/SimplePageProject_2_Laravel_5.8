@@ -1,18 +1,26 @@
 
-window.onload = function(){
-   selector = this.document.querySelector("#tableSearchSelector");
-   searchInput = this.document.querySelector("#searchInput");
-   searchInput.addEventListener("keyup", function(){
-      var data = new FormData();
-      data.append("tableName", selector.value);
-      fetch('/app/userSearch.php', {
-         method: 'POST',
-         body: data
-      })
-      .then(function(response){
-         if(response.ok){
-            console.log(">>>");
+var selector = $("#tableSearchSelector");
+var searchInput = $("#searchInput");
+
+$(document).ready(function(){
+   searchInput.keyup(function(){
+      $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $.ajax({
+         type: "POST",
+         url: "/user_search_ajax",
+         data: {
+            tableName: selector.val()
+         },
+         contentType: false,
+         cache: false,
+         processData: false,
+         success: function(response){
+            console.log(response.output);
          }
       });
    });
-}
+});
