@@ -20,8 +20,8 @@ Route::get("/", function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get("/user_search", "AdministratorController@userSearch")->name("user_search");
-Route::post("/user_search_ajax", "AdministratorController@userSearchAjax");
+Route::get("/user_search_view", "AdministratorController@userSearchView")->name("user_search_view");
+Route::get("/user_search", "AdministratorController@userSearch");
 
 //Route::get("/admin", "AdministratorController@index")->name("admin");
 
