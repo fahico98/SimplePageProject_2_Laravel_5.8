@@ -10,7 +10,6 @@
                <div class="card-body">
 
 
-
                   <div class="form-group mb-3">
                      <label for="tableSearchSelector">User Role</label>
                      <select class="form-control" id="roleSelector">
@@ -24,39 +23,24 @@
                   </div>
 
 
-
-                  <table class="table">
-                     <thead class="thead-light">
-                        <tr>
-                           <th scope="col">Name</th>
-                           <th scope="col">Last name</th>
-                           <th scope="col">Phone number</th>
-                           <th scope="col">E-mail</th>
-                        </tr>
-                     </thead>
-                     <tbody id="crudBody">
-                        <!--
-                        <tr>
-                           <th scope="row">1</th>
-                           <td>Mark</td>
-                           <td>Otto</td>
-                           <td>@/mdo</td>
-                        </tr>
-                        <tr>
-                           <th scope="row">2</th>
-                           <td>Jacob</td>
-                           <td>Thornton</td>
-                           <td>@/fat</td>
-                        </tr>
-                        <tr>
-                           <th scope="row">3</th>
-                           <td>Larry</td>
-                           <td>the Bird</td>
-                           <td>@/twitter</td>
-                        </tr>
-                        -->
-                     </tbody>
-                  </table>
+                  <div class="pt-4">
+                     <table class="table">
+                        <thead class="thead-light">
+                           <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Last name</th>
+                              <th scope="col">Phone number</th>
+                              <th scope="col">E-mail</th>
+                           </tr>
+                        </thead>
+                        <tbody id="crudBody"></tbody>
+                     </table>
+                  </div>
+                  <div class="pt-4">
+                     <nav aria-label="...">
+                        <ul id="ulPagination" class="pagination pagination-sm justify-content-center"></ul>
+                     </nav>
+                  </div>
                </div>
             </div>
          </div>
