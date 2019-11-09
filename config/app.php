@@ -174,6 +174,7 @@ return [
         // simplePageProject_2\Providers\BroadcastServiceProvider::class,
         simplePageProject_2\Providers\EventServiceProvider::class,
         simplePageProject_2\Providers\RouteServiceProvider::class,
+        simplePageProject_2\Providers\CustomBladeDirectivesProvider::class
 
     ],
 

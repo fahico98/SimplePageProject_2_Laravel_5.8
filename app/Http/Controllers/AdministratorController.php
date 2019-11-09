@@ -17,18 +17,14 @@ class AdministratorController extends Controller{
    }
 
    public function userSearch(){
-
       $currentPage = Input::get("currentPage");
       $usersPerPage = 5;
-
       if(Input::get("role") == "costumer"){
          $role_id = 3;
       }else if(Input::get("role") == "seller"){
          $role_id = 2;
       }
-
       $searchName = Input::get("searchName");
-
       if($searchName === ""){
          $totalUsers = User::where("role_id", "=", $role_id)->count();
          $users = User::where("role_id", "=", $role_id)
@@ -45,9 +41,7 @@ class AdministratorController extends Controller{
             ->limit($usersPerPage)
             ->get();
       }
-
       $totalPages = ceil($totalUsers / $usersPerPage);
-
       return response()->json([
          'totalPages' => $totalPages,
          'users' => $users

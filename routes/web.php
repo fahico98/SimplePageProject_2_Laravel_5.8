@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get("/user_search_view", "AdministratorController@userSearchView")->name("user_search_view");
 Route::get("/user_search", "AdministratorController@userSearch");
 
+Route::get("/seller_register", "SellerController@create");
+Route::post("/seller_register", "SellerController@store");
+
 //Route::get("/admin", "AdministratorController@index")->name("admin");
 
 /*
