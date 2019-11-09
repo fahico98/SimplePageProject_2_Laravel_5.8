@@ -3,10 +3,6 @@ var roleSelector = $("#roleSelector");
 var searchName = $("#searchName");
 var pagination = $("#ulPagination");
 var crud = $("#crudBody");
-var prevPage = $(".prev-page");
-var nextPage = $(".next-page");
-var selectedPage = $(".selected-page");
-var pageLink = $(".page-change-link");
 
 $(document).ready(function(){
 
@@ -21,9 +17,22 @@ $(document).ready(function(){
       searchUsers(roleSelector.val());
    });
 
-   pageLink.on("click", function(event){
+   $(document).on("click", ".page-change-link", function(event){
       event.preventDefault();
-      console.log("->" + $(this).attr("id"));
+      var page = $(this).attr("id");
+      searchUsers(roleSelector.val(), searchName.val(), parseInt(page, 10));
+   });
+
+   $(document).on("click", ".prev-page", function(event){
+      event.preventDefault();
+      var selectedPage = $(".selected-page").attr("id");
+      searchUsers(roleSelector.val(), searchName.val(), parseInt(selectedPage, 10) - 1);
+   });
+
+   $(document).on("click", ".next-page", function(event){
+      event.preventDefault();
+      var selectedPage = $(".selected-page").attr("id");
+      searchUsers(roleSelector.val(), searchName.val(), parseInt(selectedPage, 10) + 1);
    });
 
 });
@@ -85,8 +94,8 @@ function addPagination(totalPages, currentPage){
          );
       }else{
          pagination.append(
-            "<li class='page-item page-change-link'>" +
-               "<a class='page-link' href='#' id='" + i + "'>" + i + "</a>" +
+            "<li class='page-item'>" +
+               "<a class='page-link page-change-link' href='#' id='" + i + "'>" + i + "</a>" +
             "</li>"
          );
       }
