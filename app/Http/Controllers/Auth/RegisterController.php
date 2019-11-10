@@ -41,7 +41,19 @@ class RegisterController extends Controller{
     * @return void
     */
    public function __construct(){
-      $this->middleware('guest');
+
+      $this->middleware('guest')->except([
+         "showSellerRegistrationForm",
+         "createSeller",
+         "sellerRegister"
+      ]);
+
+      $this->middleware('isAdmin')->only([
+         "showSellerRegistrationForm",
+         "createSeller",
+         "sellerRegister"
+      ]);
+
    }
 
    /**
@@ -92,6 +104,47 @@ class RegisterController extends Controller{
          "e_mail" => $data["e_mail"],
          "password" => Hash::make($data['password']),
          "role_id" => 3
+      ]);
+   }
+
+   /**
+    * Show the application seller registration form.
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function showSellerRegistrationForm(){
+      return view("auth.sellerRegister");
+   }
+
+   /**
+    * Handle a seller registration request for the application.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function sellerRegister(Request $request){
+      $this->validator($request->all())->validate();
+      event(new Registered($user = $this->createSeller($request->all())));
+      Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
+      return $this->registered($request, $user) ? redirect("/user_search_view") : redirect($this->redirectPath());
+   }
+
+   /**
+    * Create a new user instance after a valid registration.
+    *
+    * @param  array  $data
+    * @return \simplePageProject_2\User
+    */
+   protected function createSeller(array $data){
+      return User::create([
+         'name' => $data['name'],
+         "lastname" => $data["lastname"],
+         "country" => $data["country"],
+         "city" => $data["city"],
+         "phone_number" => $data["phone_number"],
+         "e_mail" => $data["e_mail"],
+         "password" => Hash::make($data['password']),
+         "role_id" => 2
       ]);
    }
 }

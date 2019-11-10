@@ -24,15 +24,6 @@ class HomeController extends Controller{
     * @return \Illuminate\Contracts\Support\Renderable
     */
    public function index(Request $request){
-
-      // Adding session data via Request instance...
-      //$request->session()->put([$user->name => $user->role->role_name]);
-
-      // Adding session data via session global helper...
-      //session([$user->name => $user->role->role_name]);
-
-      //var_dump($request->session()->all());
-
       if(Auth::check()){
          $user = Auth::user();
          if(Auth::user()->isAdmin()){
