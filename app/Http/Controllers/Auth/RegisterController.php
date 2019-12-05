@@ -3,10 +3,15 @@
 namespace simplePageProject_2\Http\Controllers\Auth;
 
 use simplePageProject_2\User;
+use simplePageProject_2\Mail\ReportMail;
 use simplePageProject_2\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller{
 
@@ -36,8 +41,35 @@ class RegisterController extends Controller{
     * @return void
     */
    public function __construct(){
-      $this->middleware('guest');
+
+      $this->middleware('guest')->except([
+         "showSellerRegistrationForm",
+         "createSeller",
+         "sellerRegister"
+      ]);
+
+      $this->middleware('isAdmin')->only([
+         "showSellerRegistrationForm",
+         "createSeller",
+         "sellerRegister"
+      ]);
+
    }
+
+   /**
+    * Handle a registration request for the application.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    *
+   public function register(Request $request){
+      $this->validator($request->all())->validate();
+      event(new Registered($user = $this->create($request->all())));
+      $this->guard()->login($user);
+      Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
+      return $this->registered($request, $user) ?: redirect($this->redirectPath());
+   }
+   */
 
    /**
     * Get a validator for an incoming registration request.
@@ -49,12 +81,11 @@ class RegisterController extends Controller{
       return Validator::make($data, [
          'name' => ['required', 'string', 'max:50'],
          "lastname" => ["required", "string", "max:50"],
-         "age" => ["required", "numeric", "max:100", "min:15"],
          "country" => ["required", "string", "max:100"],
          "city" => ["required", "string", "max:100"],
          "phone_number" => ["required", "string", "numeric", "unique:users"],
          'e_mail' => ['required', "email", 'max:50', 'unique:users'],
-         'password' => ['required', 'string', 'min:8', 'confirmed']
+         'password' => ['required', 'string', 'min:8', 'confirmed'],
       ]);
    }
 
@@ -68,12 +99,53 @@ class RegisterController extends Controller{
       return User::create([
          'name' => $data['name'],
          "lastname" => $data["lastname"],
-         "age" => $data["age"],
          "country" => $data["country"],
          "city" => $data["city"],
          "phone_number" => $data["phone_number"],
          "e_mail" => $data["e_mail"],
-         "password" => Hash::make($data['password'])
+         "password" => Hash::make($data['password']),
+         "role_id" => 3
+      ]);
+   }
+
+   /**
+    * Show the application seller registration form.
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function showSellerRegistrationForm(){
+      return view("auth.sellerRegister");
+   }
+
+   /**
+    * Handle a seller registration request for the application.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function sellerRegister(Request $request){
+      $this->validator($request->all())->validate();
+      event(new Registered($user = $this->createSeller($request->all())));
+      Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
+      return $this->registered($request, $user) ? redirect("/user_search_view") : redirect($this->redirectPath());
+   }
+
+   /**
+    * Create a new user instance after a valid registration.
+    *
+    * @param  array  $data
+    * @return \simplePageProject_2\User
+    */
+   protected function createSeller(array $data){
+      return User::create([
+         'name' => $data['name'],
+         "lastname" => $data["lastname"],
+         "country" => $data["country"],
+         "city" => $data["city"],
+         "phone_number" => $data["phone_number"],
+         "e_mail" => $data["e_mail"],
+         "password" => Hash::make($data['password']),
+         "role_id" => 2
       ]);
    }
 }

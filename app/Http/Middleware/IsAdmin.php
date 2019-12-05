@@ -2,6 +2,7 @@
 
 namespace simplePageProject_2\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class IsAdmin{
@@ -14,6 +15,6 @@ class IsAdmin{
     * @return mixed
     */
    public function handle($request, Closure $next){
-      return $next($request);
+      return (Auth::check() && Auth::user()->isAdmin()) ? $next($request) : redirect("/home");
    }
 }

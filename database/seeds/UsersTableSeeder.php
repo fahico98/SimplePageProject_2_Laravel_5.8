@@ -17,7 +17,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Fahico",
          "lastname" => "Carcamo",
-         "age" => 25,
          "country" => "Colombia",
          "city" => "Bogota",
          "phone_number" => "3223986014",
@@ -29,7 +28,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Fahibran",
          "lastname" => "Carcamo",
-         "age" => 32,
          "country" => "Colombia",
          "city" => "Bogota",
          "phone_number" => "3221210081",
@@ -41,7 +39,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Jose",
          "lastname" => "Cardozo",
-         "age" => 42,
          "country" => "Colombia",
          "city" => "Liberty city",
          "phone_number" => "3219998880",
@@ -53,7 +50,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Daniel",
          "lastname" => "Medrano",
-         "age" => 40,
          "country" => "United states",
          "city" => "vice city",
          "phone_number" => "3120912991",
@@ -65,7 +61,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Carlos",
          "lastname" => "Gutierrez",
-         "age" => 33,
          "country" => "Brazil",
          "city" => "Los santos",
          "phone_number" => "3113434343",
@@ -77,7 +72,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Ingrid",
          "lastname" => "Sarate",
-         "age" => 21,
          "country" => "Brazil",
          "city" => "Los santos",
          "phone_number" => "3133344551",
@@ -89,7 +83,6 @@ class UsersTableSeeder extends Seeder{
       DB::table('users')->insert([
          "name" => "Daniela",
          "lastname" => "Corzo",
-         "age" => 23,
          "country" => "Colombia",
          "city" => "San andreas",
          "phone_number" => "3220011343",

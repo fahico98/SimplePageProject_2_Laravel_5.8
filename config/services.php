@@ -34,6 +34,10 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+   'sendgrid' => [
+      'api_key' => env('fahico.studio'),
+   ],
+
     'stripe' => [
         'model' => simplePageProject_2\User::class,
         'key' => env('STRIPE_KEY'),

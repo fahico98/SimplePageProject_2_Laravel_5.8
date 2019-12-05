@@ -4,7 +4,7 @@ namespace simplePageProject_2\Http\Middleware;
 
 use Closure;
 
-class RoleMiddleware{
+class Roles{
 
    /**
     * Handle an incoming request.
@@ -14,7 +14,6 @@ class RoleMiddleware{
     * @return mixed
     */
    public function handle($request, Closure $next){
-      return redirec("/");
-      //return $next($request);
+      return redirect("/");
    }
 }

@@ -4,7 +4,7 @@ namespace simplePageProject_2\Http\Middleware;
 
 use Closure;
 
-class CheckAge{
+class AuthenticateRole{
 
    /**
     * Handle an incoming request.
@@ -14,9 +14,6 @@ class CheckAge{
     * @return mixed
     */
    public function handle($request, Closure $next){
-      if($request->age < 15){
-         return redirect('home');
-      }
       return $next($request);
    }
 }

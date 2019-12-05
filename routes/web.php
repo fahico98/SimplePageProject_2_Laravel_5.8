@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,43 +13,50 @@
 |
 */
 
-Route::get('/', function () {
-   /*
-   $user = Auth::user();
-   if($user->isAdmin()){
-      //
-   }else{
-      //
-   }
-   */
+Route::get("/", function(){
    return view('welcome');
 });
 
-/**
- * Auth::routes() will create the followiing routes.
- *
- * Authentication Routes...
- * $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
- * $this->post('login', 'Auth\LoginController@login');
- * $this->post('logout', 'Auth\LoginController@logout')->name('logout');
- *
- * Registration Routes...
- * $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
- * $this->post('register', 'Auth\RegisterController@register');
- *
- * Password Reset Routes...
- * $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
- * $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
- * $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
- * $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
- *
- * To create the Email Verification Routes you must use "Auth::routes(['verify' => true])"...
- * $this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
- * $this->get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
- * $this->get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
- */
-Auth::routes();
+// Auth::routes(["verify" => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/ageDenied', 'HomeController@ageDenied')->name('ageDenied');
+Route::get("/user_search_view", "AdministratorController@userSearchView")->name("user_search_view");
+Route::get("/user_search", "AdministratorController@userSearch");
+
+Route::get("/seller_register", "Auth\RegisterController@showSellerRegistrationForm");
+Route::post("/seller_register", "Auth\RegisterController@sellerRegister");
+
+//Route::get("/admin", "AdministratorController@index")->name("admin");
+
+/*
+Route::group(["middleware" => "web"], function(){
+
+   Route::get('/', function(){
+      return view('welcome');
+   });
+
+   Auth::routes();
+   Route::get('/home', 'HomeController@index')->name('home');
+   Route::get("/admins/login", "AdministratorsController@showLoginForm");
+   Route::post("/admins/login", "AdministratorsController@login")->name('adminsLogin');
+   Route::get("/admins/area", "AdministratorsController@secret");
+});
+*/
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
