@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group row">
-                           <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Your Country') }}</label>
+                           <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Seller Country') }}</label>
 
                            <div class="col-md-6">
                                  <input id="country" type="text" class="form-control @error('country') is-invalid @enderror"
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group row">
-                           <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Your City') }}</label>
+                           <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Seller City') }}</label>
 
                            <div class="col-md-6">
                                  <input id="city" type="text" class="form-control @error('city') is-invalid @enderror"

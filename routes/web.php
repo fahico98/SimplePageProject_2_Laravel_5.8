@@ -17,8 +17,6 @@ Route::get("/", function(){
    return view('welcome');
 });
 
-// Auth::routes(["verify" => true]);
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get("/user_search_view", "AdministratorController@userSearchView")->name("user_search_view");
@@ -27,22 +25,7 @@ Route::get("/user_search", "AdministratorController@userSearch");
 Route::get("/seller_register", "Auth\RegisterController@showSellerRegistrationForm");
 Route::post("/seller_register", "Auth\RegisterController@sellerRegister");
 
-//Route::get("/admin", "AdministratorController@index")->name("admin");
-
-/*
-Route::group(["middleware" => "web"], function(){
-
-   Route::get('/', function(){
-      return view('welcome');
-   });
-
-   Auth::routes();
-   Route::get('/home', 'HomeController@index')->name('home');
-   Route::get("/admins/login", "AdministratorsController@showLoginForm");
-   Route::post("/admins/login", "AdministratorsController@login")->name('adminsLogin');
-   Route::get("/admins/area", "AdministratorsController@secret");
-});
-*/
+// Auth::routes(["verify" => true]);
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -60,3 +43,19 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
+//Route::get("/admin", "AdministratorController@index")->name("admin");
+
+/*
+Route::group(["middleware" => "web"], function(){
+
+   Route::get('/', function(){
+      return view('welcome');
+   });
+
+   Auth::routes();
+   Route::get('/home', 'HomeController@index')->name('home');
+   Route::get("/admins/login", "AdministratorsController@showLoginForm");
+   Route::post("/admins/login", "AdministratorsController@login")->name('adminsLogin');
+   Route::get("/admins/area", "AdministratorsController@secret");
+});
+*/

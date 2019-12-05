@@ -57,21 +57,6 @@ class RegisterController extends Controller{
    }
 
    /**
-    * Handle a registration request for the application.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    *
-   public function register(Request $request){
-      $this->validator($request->all())->validate();
-      event(new Registered($user = $this->create($request->all())));
-      $this->guard()->login($user);
-      Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
-      return $this->registered($request, $user) ?: redirect($this->redirectPath());
-   }
-   */
-
-   /**
     * Get a validator for an incoming registration request.
     *
     * @param  array  $data
@@ -126,7 +111,7 @@ class RegisterController extends Controller{
    public function sellerRegister(Request $request){
       $this->validator($request->all())->validate();
       event(new Registered($user = $this->createSeller($request->all())));
-      Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
+      // Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
       return $this->registered($request, $user) ? redirect("/user_search_view") : redirect($this->redirectPath());
    }
 
