@@ -1,10 +1,6 @@
 <?php
 
-<<<<<<< HEAD
 namespace App\Console;
-=======
-namespace simplePageProject_2\Console;
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

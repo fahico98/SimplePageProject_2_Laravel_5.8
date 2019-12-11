@@ -29,11 +29,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
-=======
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +42,6 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'port' => env('MAIL_PORT', 2525),
 
     /*
@@ -64,25 +59,6 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'verify@fahico.studio.com'),
         'name' => env('MAIL_FROM_NAME', 'Email verify'),
     ],
-=======
-    'port' => env('MAIL_PORT', 587),
-
-   /*
-   |--------------------------------------------------------------------------
-   | Global "From" Address
-   |--------------------------------------------------------------------------
-   |
-   | You may wish for all e-mails sent by your application to be sent from
-   | the same address. Here, you may specify a name and address that is
-   | used globally for all e-mails that are sent by your application.
-   |
-   */
-
-   'from' => [
-      "address" => env('MAIL_FROM_ADDRESS', "report@fahico.studio.com"),
-      "name" => env('MAIL_FROM_NAME', "Fahico Studio")
-   ],
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
     /*
     |--------------------------------------------------------------------------
@@ -108,15 +84,9 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'username' => env('MAIL_USERNAME', "9bd4912b43db04"),
 
     'password' => env('MAIL_PASSWORD', "4dd5363554b218"),
-=======
-    'username' => env('MAIL_USERNAME'),
-
-    'password' => env('MAIL_PASSWORD'),
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
     /*
     |--------------------------------------------------------------------------

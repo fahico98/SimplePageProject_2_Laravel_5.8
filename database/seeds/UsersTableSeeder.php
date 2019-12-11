@@ -91,8 +91,4 @@ class UsersTableSeeder extends Seeder{
          "role_id" => 3
       ]);
    }
-<<<<<<< HEAD
-
-=======
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 }

@@ -26,8 +26,4 @@ class RolesTableSeeder extends Seeder{
          "name" => "costumer"
       ]);
    }
-<<<<<<< HEAD
-
-=======
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 }

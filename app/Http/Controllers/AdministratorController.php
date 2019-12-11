@@ -1,18 +1,10 @@
 <?php
 
-<<<<<<< HEAD
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\User;
-=======
-namespace simplePageProject_2\Http\Controllers;
-
-use Illuminate\Support\Facades\Input;
-use simplePageProject_2\User;
-use Illuminate\Http\Request;
->>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
 class AdministratorController extends Controller{
 
