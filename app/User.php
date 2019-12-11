@@ -1,9 +1,18 @@
 <?php
 
+<<<<<<< HEAD
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+=======
+namespace simplePageProject_2;
+
+use simplePageProject_2\Role;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail{
@@ -55,4 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail{
       return $this->role->name === "seller";
    }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55

@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+<<<<<<< HEAD
         * Package Service Providers...
         */
 
@@ -175,6 +176,20 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CustomBladeDirectivesProvider::class,
+=======
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Service Providers...
+         */
+        simplePageProject_2\Providers\AppServiceProvider::class,
+        simplePageProject_2\Providers\AuthServiceProvider::class,
+        // simplePageProject_2\Providers\BroadcastServiceProvider::class,
+        simplePageProject_2\Providers\EventServiceProvider::class,
+        simplePageProject_2\Providers\RouteServiceProvider::class,
+        simplePageProject_2\Providers\CustomBladeDirectivesProvider::class
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
     ],
 

@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
+=======
+
+<!doctype html>
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<<<<<<< HEAD
         <title>Laravel</title>
+=======
+        <title>Simple Page Project 2.0</title>
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -67,24 +76,41 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+<<<<<<< HEAD
                      @auth
+=======
+                    @auth
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
                         <!--
                         <a href="profile"></a>
                         -->
                         <a href="{{ url('/home') }}">Home</a>
                         <a href="{{ url('/home') }}">Profile</a>
+<<<<<<< HEAD
                      @else
                         <a href="{{ route('login') }}">Login</a>
                      @if (Route::has('register'))
                         <a href="{{ route('register') }}">Register</a>
                      @endif
                  @endauth
+=======
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+                        @if (Route::has('register'))
+                           <a href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
+<<<<<<< HEAD
                      Simple Page Project 2.0
+=======
+                  Simple Page Project 2.0
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
                 </div>
 
                 <div class="links">

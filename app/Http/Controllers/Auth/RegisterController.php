@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 namespace App\Http\Controllers\Auth;
 
 use App\User;
@@ -13,6 +14,24 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class RegisterController extends Controller{
 
     /*
+=======
+namespace simplePageProject_2\Http\Controllers\Auth;
+
+use simplePageProject_2\User;
+use simplePageProject_2\Mail\ReportMail;
+use simplePageProject_2\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+
+class RegisterController extends Controller{
+
+   /*
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
    |--------------------------------------------------------------------------
    | Register Controller
    |--------------------------------------------------------------------------
@@ -50,6 +69,10 @@ class RegisterController extends Controller{
          "createSeller",
          "sellerRegister"
       ]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
    }
 
    /**
@@ -107,8 +130,13 @@ class RegisterController extends Controller{
    public function sellerRegister(Request $request){
       $this->validator($request->all())->validate();
       event(new Registered($user = $this->createSeller($request->all())));
+<<<<<<< HEAD
       //return $this->registered($request, $user) ? : redirect("/user_search_view");
       return redirect("/user_search_view");
+=======
+      // Mail::to("report@fahico.studio.com")->send(new ReportMail($request));
+      return $this->registered($request, $user) ? redirect("/user_search_view") : redirect($this->redirectPath());
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
    }
 
    /**

@@ -1,8 +1,14 @@
 <?php
 
+<<<<<<< HEAD
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+=======
+namespace simplePageProject_2\Http\Controllers\Auth;
+
+use simplePageProject_2\Http\Controllers\Controller;
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller{
@@ -43,5 +49,8 @@ class LoginController extends Controller{
    public function username(){
       return 'e_mail';
    }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 }

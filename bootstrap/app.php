@@ -12,7 +12,11 @@
 */
 
 $app = new Illuminate\Foundation\Application(
+<<<<<<< HEAD
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+=======
+   $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 );
 
 /*
@@ -27,6 +31,7 @@ $app = new Illuminate\Foundation\Application(
 */
 
 $app->singleton(
+<<<<<<< HEAD
     Illuminate\Contracts\Http\Kernel::class,
     App\Http\Kernel::class
 );
@@ -39,6 +44,20 @@ $app->singleton(
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
+=======
+   Illuminate\Contracts\Http\Kernel::class,
+   simplePageProject_2\Http\Kernel::class
+);
+
+$app->singleton(
+   Illuminate\Contracts\Console\Kernel::class,
+   simplePageProject_2\Console\Kernel::class
+);
+
+$app->singleton(
+   Illuminate\Contracts\Debug\ExceptionHandler::class,
+   simplePageProject_2\Exceptions\Handler::class
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 );
 
 /*

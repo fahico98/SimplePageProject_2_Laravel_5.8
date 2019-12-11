@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 namespace App\Exceptions;
+=======
+namespace simplePageProject_2\Exceptions;
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

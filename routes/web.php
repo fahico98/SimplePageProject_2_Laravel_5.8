@@ -1,5 +1,10 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Auth;
+
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +45,23 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+<<<<<<< HEAD
+=======
+
+//Route::get("/admin", "AdministratorController@index")->name("admin");
+
+/*
+Route::group(["middleware" => "web"], function(){
+
+   Route::get('/', function(){
+      return view('welcome');
+   });
+
+   Auth::routes();
+   Route::get('/home', 'HomeController@index')->name('home');
+   Route::get("/admins/login", "AdministratorsController@showLoginForm");
+   Route::post("/admins/login", "AdministratorsController@login")->name('adminsLogin');
+   Route::get("/admins/area", "AdministratorsController@secret");
+});
+*/
+>>>>>>> 110ffc8a2994256a0965438821bdb85263fbbc55
