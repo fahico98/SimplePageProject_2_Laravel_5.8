@@ -8,7 +8,7 @@
                <div class="card-header">Admin Panel</div>
                <div class="card-body">
                   You are admin {{ $user->name }}, got have everything under control...!<br>
-                  Now you can access the <a href="{{ route('user_search_view') }}">user search</a>.
+                  Now you can access the <a href="{{ route('index') }}">user search</a>.
                </div>
             </div>
          </div>

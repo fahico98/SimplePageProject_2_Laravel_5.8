@@ -15,13 +15,13 @@ Route::get("/", function(){
    return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home');
 
-Route::get("/user_search_view", "AdministratorController@userSearchView")->name("user_search_view");
-Route::get("/user_search", "AdministratorController@userSearch");
+Route::resource('admin/users/', 'AdministratorController');
+Route::get("admin/users/search", "AdministratorController@search");
 
-Route::get("/seller_register", "Auth\RegisterController@showSellerRegistrationForm");
-Route::post("/seller_register", "Auth\RegisterController@sellerRegister");
+// Route::get("/seller_register", "Auth\RegisterController@showSellerRegistrationForm");
+// Route::post("/seller_register", "Auth\RegisterController@sellerRegister");
 
 // Auth::routes(["verify" => true]);
 

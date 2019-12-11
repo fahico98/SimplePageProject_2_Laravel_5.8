@@ -24,9 +24,10 @@
                         <thead class="thead-light">
                            <tr>
                               <th scope="col">Name</th>
-                              <th scope="col">Last name</th>
-                              <th scope="col">Phone number</th>
-                              <th scope="col">E-mail</th>
+                              <th scope="col">Lastname</th>
+                              <th scope="col" class="text-center">Phone number</th>
+                              <th scope="col" class="text-center">E-mail</th>
+                              <th scope="col" class="text-center">Actions</th>
                            </tr>
                         </thead>
                         <tbody id="crudBody"></tbody>

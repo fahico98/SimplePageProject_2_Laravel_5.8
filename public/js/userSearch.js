@@ -39,15 +39,17 @@ $(document).ready(function(){
 
 function searchUsers(role, searchName = "", currentPage = 1){
    var url = (searchName === "") ?
-      "/user_search?role=" + role :
-      "/user_search?role=" + role + "&searchName=" + searchName;
+      "/admin/users/search?role=" + role :
+      "/admin/users/search?role=" + role + "&searchName=" + searchName;
 
    url += "&currentPage=" + currentPage;
+
    $.ajaxSetup({
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-   });
+  });
+
    $.ajax({
       url: url,
       type: "GET",
@@ -60,8 +62,12 @@ function searchUsers(role, searchName = "", currentPage = 1){
                "<tr>" +
                   "<th scope='row'>" + value.name + "</th>" +
                   "<td>" + value.lastname + "</td>" +
-                  "<td>" + value.phone_number + "</td>" +
-                  "<td>" + value.e_mail + "</td>" +
+                  "<td class='text-center'>" + value.phone_number + "</td>" +
+                  "<td class='text-center'>" + value.e_mail + "</td>" +
+                  "<td class='text-center'>" +
+                     "<i class='fas fa-trash-alt delete-icon mr-1' id='" + value.id + "' style='cursor: pointer'></i>" +
+                     "<i class='fas fa-edit edit-icon' id='" + value.id + "' style='cursor: pointer'></i>" +
+                  "</td>" +
                "</tr>"
             );
          });

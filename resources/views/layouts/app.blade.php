@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5bad3b7e08.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
@@ -55,7 +58,7 @@
                               </a>
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                  @isadmin
-                                    <a class="dropdown-item" href="{{ asset('seller_register') }}">
+                                    <a class="dropdown-item" href="{{ asset('admin/users/create') }}">
                                           {{ __('Seller register') }}
                                     </a>
                                  @endisadmin

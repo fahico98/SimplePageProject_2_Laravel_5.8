@@ -108,7 +108,7 @@ class RegisterController extends Controller{
       $this->validator($request->all())->validate();
       event(new Registered($user = $this->createSeller($request->all())));
       //return $this->registered($request, $user) ? : redirect("/user_search_view");
-      return redirect("/user_search_view");
+      return redirect("/user_search/index");
    }
 
    /**
