@@ -21,6 +21,49 @@ class AdministratorController extends Controller{
       return view("administrators.index");
    }
 
+   public function crudContent(){
+
+      $currentPage = Input::get("currentPage", 1);
+      $searchName = Input::get("searchName", "");
+      $role = Input::get("role", "costumer");
+
+      $usersPerPage = 5;
+
+      if($role == "costumer"){
+         $role_id = 3;
+      }else if($role == "seller"){
+         $role_id = 2;
+      }
+
+      if($searchName === ""){
+         $totalUsers = User::where("role_id", "=", $role_id)->count();
+         $users = User::where("role_id", "=", $role_id)
+            ->offset(($currentPage - 1) * $usersPerPage)
+            ->limit($usersPerPage)
+            ->get();
+      }else{
+         $totalUsers = User::where("role_id", "=", $role_id)
+            ->where("name", "like", "%" . $searchName . "%")
+            ->count();
+         $users = User::where("role_id", "=", $role_id)
+            ->where("name", "like", "%" . $searchName . "%")
+            ->offset(($currentPage - 1) * $usersPerPage)
+            ->limit($usersPerPage)
+            ->get();
+      }
+
+      $totalPages = ceil($totalUsers / $usersPerPage);
+
+      return view("administrators.crudContent")
+         ->with([
+            "users" => $users,
+            "role" => $role,
+            "searchName" => $searchName,
+            "currentPage" => $currentPage,
+            "totalPages" => $totalPages
+         ])->render();
+   }
+
    /**
     * Show the form for creating a new resource.
     *
@@ -78,38 +121,11 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function destroy($id){
-      //
+      echo("$id has been destroied...!");
    }
 
-   public function search(){
-      $currentPage = Input::get("currentPage");
-      $usersPerPage = 5;
-      if(Input::get("role") == "costumer"){
-         $role_id = 3;
-      }else if(Input::get("role") == "seller"){
-         $role_id = 2;
-      }
-      $searchName = Input::get("searchName");
-      if($searchName === ""){
-         $totalUsers = User::where("role_id", "=", $role_id)->count();
-         $users = User::where("role_id", "=", $role_id)
-            ->offset(($currentPage - 1) * $usersPerPage)
-            ->limit($usersPerPage)
-            ->get();
-      }else{
-         $totalUsers = User::where("role_id", "=", $role_id)
-            ->where("name", "like", "%" . $searchName . "%")
-            ->count();
-         $users = User::where("role_id", "=", $role_id)
-            ->where("name", "like", "%" . $searchName . "%")
-            ->offset(($currentPage - 1) * $usersPerPage)
-            ->limit($usersPerPage)
-            ->get();
-      }
-      $totalPages = ceil($totalUsers / $usersPerPage);
-      return response()->json([
-         'totalPages' => $totalPages,
-         'users' => $users
-      ]);
+   public function crudTable(){
+
+      //return view("administrators.crudTable");
    }
 }

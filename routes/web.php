@@ -18,7 +18,7 @@ Route::get("/", function(){
 Route::get('home', 'HomeController@index')->name('home');
 
 Route::resource('admin/users/', 'AdministratorController');
-Route::get("admin/users/search", "AdministratorController@search");
+Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 
 // Route::get("/seller_register", "Auth\RegisterController@showSellerRegistrationForm");
 // Route::post("/seller_register", "Auth\RegisterController@sellerRegister");

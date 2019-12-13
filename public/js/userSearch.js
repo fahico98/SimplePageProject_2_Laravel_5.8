@@ -1,46 +1,46 @@
 
-var roleSelector = $("#roleSelector");
-var searchName = $("#searchName");
-var pagination = $("#ulPagination");
-var crud = $("#crudBody");
-
 $(document).ready(function(){
 
-   searchUsers(roleSelector.val());
+   searchUsers();
 
-   searchName.on("keyup", function(){
-      searchUsers(roleSelector.val(), searchName.val());
+   $(document).on("keyup", "#searchName", function(){
+      searchUsers($("#roleSelector").val(), $("#searchName").val());
    });
 
-   roleSelector.on("change", function(){
-      searchName.val("");
-      searchUsers(roleSelector.val());
+   $(document).on("change", "#roleSelector", function(){
+      $("#searchName").val("");
+      searchUsers($("#roleSelector").val());
+   });
+
+   $(document).on("click", ".delete-icon", function(event){
+      event.preventDefault();
+      var id = $(this).attr("id");
    });
 
    $(document).on("click", ".page-change-link", function(event){
       event.preventDefault();
       var page = $(this).attr("id");
-      searchUsers(roleSelector.val(), searchName.val(), parseInt(page, 10));
+      searchUsers($("#roleSelector").val(), $("#searchName").val(), parseInt(page, 10));
    });
 
    $(document).on("click", ".prev-page", function(event){
       event.preventDefault();
       var selectedPage = $(".selected-page").attr("id");
-      searchUsers(roleSelector.val(), searchName.val(), parseInt(selectedPage, 10) - 1);
+      searchUsers($("#roleSelector").val(), $("#searchName").val(), parseInt(selectedPage, 10) - 1);
    });
 
    $(document).on("click", ".next-page", function(event){
       event.preventDefault();
       var selectedPage = $(".selected-page").attr("id");
-      searchUsers(roleSelector.val(), searchName.val(), parseInt(selectedPage, 10) + 1);
+      searchUsers($("#roleSelector").val(), $("#searchName").val(), parseInt(selectedPage, 10) + 1);
    });
-
 });
 
-function searchUsers(role, searchName = "", currentPage = 1){
+function searchUsers(role = "costumer", searchName = "", currentPage = 1){
+
    var url = (searchName === "") ?
-      "/admin/users/search?role=" + role :
-      "/admin/users/search?role=" + role + "&searchName=" + searchName;
+      "/admin/users/crud_content?role=" + role :
+      "/admin/users/crud_content?role=" + role + "&searchName=" + searchName;
 
    url += "&currentPage=" + currentPage;
 
@@ -48,75 +48,15 @@ function searchUsers(role, searchName = "", currentPage = 1){
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-  });
+   });
 
    $.ajax({
       url: url,
       type: "GET",
-      dataType: "JSON",
+      dataType: "html",
       processData: false,
       success: function(response){
-         crud.empty();
-         $.each(response.users, function(key, value){
-            crud.append(
-               "<tr>" +
-                  "<th scope='row'>" + value.name + "</th>" +
-                  "<td>" + value.lastname + "</td>" +
-                  "<td class='text-center'>" + value.phone_number + "</td>" +
-                  "<td class='text-center'>" + value.e_mail + "</td>" +
-                  "<td class='text-center'>" +
-                     "<i class='fas fa-trash-alt delete-icon mr-1' id='" + value.id + "' style='cursor: pointer'></i>" +
-                     "<i class='fas fa-edit edit-icon' id='" + value.id + "' style='cursor: pointer'></i>" +
-                  "</td>" +
-               "</tr>"
-            );
-         });
-         addPagination(response.totalPages, currentPage);
+         $("#crudContainer").html(response);
       }
    });
-}
-
-function addPagination(totalPages, currentPage){
-   pagination.empty();
-   if(currentPage === 1){
-      pagination.append(
-         "<li class='page-item disabled'>" +
-            "<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>Previous</a>" +
-         "</li>"
-      );
-   }else{
-      pagination.append(
-         "<li class='page-item'>" +
-            "<a class='page-link prev-page' href='#'>Previous</a>" +
-         "</li>"
-      );
-   }
-   for(var i = 1; i <= totalPages; i++){
-      if(i === currentPage){
-         pagination.append(
-            "<li class='page-item active' aria-current='page'>" +
-               "<span class='page-link selected-page' id='" + i + "'>" + i + "<span class='sr-only'>(current)</span></span>" +
-            "</li>"
-         );
-      }else{
-         pagination.append(
-            "<li class='page-item'>" +
-               "<a class='page-link page-change-link' href='#' id='" + i + "'>" + i + "</a>" +
-            "</li>"
-         );
-      }
-   }
-   if(currentPage === totalPages){
-      pagination.append(
-         "<li class='page-item disabled'>" +
-            "<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>Next</a>" +
-         "</li>"
-      );
-   }else{
-      pagination.append(
-         "<li class='page-item'>" +
-            "<a class='page-link next-page' href='#'>Next</a>" +
-         "</li>"
-      );
-   }
 }
