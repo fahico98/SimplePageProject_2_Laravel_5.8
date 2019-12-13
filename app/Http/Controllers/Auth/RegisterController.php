@@ -53,6 +53,16 @@ class RegisterController extends Controller{
    }
 
    /**
+    * Show the application registration form.
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function showRegistrationForm(){
+      $data = ["action" => "register"];
+      return view('auth.register')->with("data", $data);
+   }
+
+   /**
     * Get a validator for an incoming registration request.
     *
     * @param  array  $data

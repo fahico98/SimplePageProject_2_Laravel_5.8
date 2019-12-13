@@ -98,7 +98,12 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function edit($id){
-      //
+      $user = User::where("id", "=", $id)->get();
+      $data = [
+         "action" => "edit",
+         "user" => $user->first()
+      ];
+      return view("auth.register")->with("data", $data);
    }
 
    /**
@@ -109,7 +114,7 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function update(Request $request, $id){
-      //
+
    }
 
    /**
@@ -122,8 +127,4 @@ class AdministratorController extends Controller{
       echo("$id has been destroied...!");
    }
 
-   public function crudTable(){
-
-      //return view("administrators.crudTable");
-   }
 }
