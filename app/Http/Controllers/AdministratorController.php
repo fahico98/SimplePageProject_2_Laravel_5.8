@@ -54,14 +54,12 @@ class AdministratorController extends Controller{
 
       $totalPages = ceil($totalUsers / $usersPerPage);
 
-      return view("administrators.crudContent")
+      return view("administrators.crud_content")
          ->with([
             "users" => $users,
-            "role" => $role,
-            "searchName" => $searchName,
             "currentPage" => $currentPage,
             "totalPages" => $totalPages
-         ])->render();
+         ]);
    }
 
    /**

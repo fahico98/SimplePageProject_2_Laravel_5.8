@@ -56,7 +56,7 @@ function searchUsers(role = "costumer", searchName = "", currentPage = 1){
       dataType: "html",
       processData: false,
       success: function(response){
-         $("#crudContainer").html(response);
+         $("#tableContainer").html(response);
       }
    });
 }
