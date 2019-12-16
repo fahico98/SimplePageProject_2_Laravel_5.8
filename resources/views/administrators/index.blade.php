@@ -25,5 +25,5 @@
          </div>
       </div>
    </div>
-   <script src="{{ asset('js/userSearch.js') }}" defer></script>
+   <script src="{{ asset('js/administrator/index.js') }}" defer></script>
 @endsection

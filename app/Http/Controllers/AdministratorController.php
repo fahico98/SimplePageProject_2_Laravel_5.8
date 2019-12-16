@@ -68,6 +68,10 @@ class AdministratorController extends Controller{
       return view("administrators.modal_delete_form")->with("user", $user);
    }
 
+   public function modalUpdateForm(){
+      return view("administrators.modal_update_form");
+   }
+
    /**
     * Show the form for creating a new resource.
     *
@@ -120,7 +124,16 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function update(Request $request, $id){
-
+      User::where("id", "=", $id)
+         ->update([
+            "name" => $request->name,
+            "lastname" => $request->lastname,
+            "country" => $request->country,
+            "city" => $request->city,
+            "phone_number" => $request->phone_number,
+            "e_mail" => $request->e_mail
+         ]);
+      return redirect(route("users.index"));
    }
 
    /**
@@ -130,6 +143,7 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function destroy($id){
-      echo("<h2>$id has been destroied...!</h2>");
+      $users = User::where("id", "=", $id)->delete();
+      return redirect(route("users.index"));
    }
 }

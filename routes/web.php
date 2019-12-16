@@ -18,6 +18,7 @@ Route::get("/", function(){
 Route::get('home', 'HomeController@index')->name('home');
 
 Route::get("admin/users/modal_delete_form", "AdministratorController@modalDeleteForm");
+Route::get("admin/users/modal_update_form", "AdministratorController@modalUpdateForm");
 Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 Route::resource('admin/users', 'AdministratorController');
 

@@ -18,9 +18,11 @@
             Are you sure to want to delete <strong>{{ $user->name }}</strong> user ?
          </div>
          <div class="modal-footer">
-            <form action="{{ route("users.destroy", ["id" => $user->id]) }}">
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Accept</button>
+            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+               @csrf
+               @method('DELETE')
+               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+               <button type="submit" class="btn btn-primary">Accept</button>
             </form>
          </div>
       </div>
