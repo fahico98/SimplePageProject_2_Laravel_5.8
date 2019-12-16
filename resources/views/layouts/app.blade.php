@@ -58,8 +58,11 @@
                               </a>
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                  @isadmin
-                                    <a class="dropdown-item" href="{{ asset('admin/users/create') }}">
-                                          {{ __('Seller register') }}
+                                    <a class="dropdown-item" href="{{ route('users.seller_register_form') }}">
+                                       {{ __('Seller register') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">
+                                       {{ __('User search') }}
                                     </a>
                                  @endisadmin
                                  <a class="dropdown-item" href="{{ route('logout') }}"

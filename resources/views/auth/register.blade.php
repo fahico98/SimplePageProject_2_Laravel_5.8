@@ -18,7 +18,7 @@
             @elseif($data["action"] === "seller_register")
                <div class="card-header">{{ __('Seller Register') }}</div>
                <div class="card-body">
-                  <form method="POST" action="{{ asset('seller_register') }}">
+                  <form method="POST" action="{{ route('users.seller_register') }}">
             @endif
                   @csrf
                   <div class="form-group row">

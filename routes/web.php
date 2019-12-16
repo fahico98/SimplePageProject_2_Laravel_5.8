@@ -17,13 +17,15 @@ Route::get("/", function(){
 
 Route::get('home', 'HomeController@index')->name('home');
 
+Route::get("admin/users/seller_register", "Auth\RegisterController@showSellerRegistrationForm")
+   ->name("users.seller_register_form");
+Route::post("admin/users/seller_register", "Auth\RegisterController@sellerRegister")
+   ->name("users.seller_register");
+
 Route::get("admin/users/modal_delete_form", "AdministratorController@modalDeleteForm");
 Route::get("admin/users/modal_update_form", "AdministratorController@modalUpdateForm");
 Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 Route::resource('admin/users', 'AdministratorController');
-
-// Route::get("/seller_register", "Auth\RegisterController@showSellerRegistrationForm");
-// Route::post("/seller_register", "Auth\RegisterController@sellerRegister");
 
 // Auth::routes(["verify" => true]);
 
