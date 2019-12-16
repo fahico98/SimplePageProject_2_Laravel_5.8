@@ -62,6 +62,12 @@ class AdministratorController extends Controller{
          ]);
    }
 
+   public function modalDeleteForm(){
+      $id = Input::get("id");
+      $user = User::where("id", "=", $id)->get()->first();
+      return view("administrators.modal_delete_form")->with("user", $user);
+   }
+
    /**
     * Show the form for creating a new resource.
     *
@@ -124,7 +130,6 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function destroy($id){
-      echo("$id has been destroied...!");
+      echo("<h2>$id has been destroied...!</h2>");
    }
-
 }

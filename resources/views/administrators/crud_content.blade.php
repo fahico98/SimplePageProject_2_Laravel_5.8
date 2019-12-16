@@ -18,11 +18,11 @@
                <td class="text-center">{{$user->phone_number}}</td>
                <td class="text-center">{{$user->e_mail}}</td>
                <td class="text-center">
-                  <a href="{{ route("users.destroy", ["id" =>  $user->id ]) }}">
-                     <i class="fas fa-trash-alt delete-icon mr-1" title="Delete user"></i>
+                  <a href="#">
+                     <i class="fas fa-trash-alt delete-icon mr-1" title="Delete user" id="{{$user->id}}"></i>
                   </a>
                   <a href="{{ route("users.edit", ["id" =>  $user->id ]) }}">
-                     <i class="fas fa-edit edit-icon" title="Update user"></i>
+                     <i class="fas fa-edit edit-icon" title="Update user" id="{{$user->id}}"></i>
                   </a>
                </td>
             </tr>
@@ -68,3 +68,6 @@
       </ul>
    </nav>
 </div>
+
+<div id="modalContent"></div>
+

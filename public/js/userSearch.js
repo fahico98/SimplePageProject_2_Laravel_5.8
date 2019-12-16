@@ -14,7 +14,8 @@ $(document).ready(function(){
 
    $(document).on("click", ".delete-icon", function(event){
       event.preventDefault();
-      var id = $(this).attr("id");
+      modalDeleteForm($(this).attr("id"));
+      $("#triggerModalButton").trigger("click");
    });
 
    $(document).on("click", ".page-change-link", function(event){
@@ -35,6 +36,26 @@ $(document).ready(function(){
       searchUsers($("#roleSelector").val(), $("#searchName").val(), parseInt(selectedPage, 10) + 1);
    });
 });
+
+function modalDeleteForm(id){
+
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+
+   $.ajax({
+      url: "/admin/users/modal_delete_form?id=" + id,
+      type: "GET",
+      dataType: "html",
+      processData: false,
+      success: function(response){
+         $("#modalContent").html(response);
+      },
+      async: false
+   });
+}
 
 function searchUsers(role = "costumer", searchName = "", currentPage = 1){
 
