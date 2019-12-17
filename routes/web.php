@@ -27,6 +27,8 @@ Route::get("admin/users/modal_update_form", "AdministratorController@modalUpdate
 Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 Route::resource('admin/users', 'AdministratorController');
 
+
+
 // Auth::routes(["verify" => true]);
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

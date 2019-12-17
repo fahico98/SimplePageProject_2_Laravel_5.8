@@ -78,7 +78,7 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function create(){
-      return view("administrators.sellerRegister");
+      //return view("administrators.sellerRegister");
    }
 
    /**
