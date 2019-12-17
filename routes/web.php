@@ -27,7 +27,8 @@ Route::get("admin/users/modal_update_form", "AdministratorController@modalUpdate
 Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 Route::resource('admin/users', 'AdministratorController');
 
-
+Route::get("user/profile/{e_mail}", "UserController@profile")->name("user.profile");
+Route::post("user/profile_picture", "UserController@profilePicture")->name("user.profilePicture");
 
 // Auth::routes(["verify" => true]);
 

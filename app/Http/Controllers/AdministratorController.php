@@ -18,7 +18,7 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function index(){
-      return view("administrators.index");
+      return view("administrator.index");
    }
 
    public function crudContent(){
@@ -54,7 +54,7 @@ class AdministratorController extends Controller{
 
       $totalPages = ceil($totalUsers / $usersPerPage);
 
-      return view("administrators.crud_content")
+      return view("administrator.crud_content")
          ->with([
             "users" => $users,
             "currentPage" => $currentPage,
@@ -65,11 +65,11 @@ class AdministratorController extends Controller{
    public function modalDeleteForm(){
       $id = Input::get("id");
       $user = User::where("id", "=", $id)->get()->first();
-      return view("administrators.modal_delete_form")->with("user", $user);
+      return view("administrator.modal_delete_form")->with("user", $user);
    }
 
    public function modalUpdateForm(){
-      return view("administrators.modal_update_form");
+      return view("administrator.modal_update_form");
    }
 
    /**
@@ -78,7 +78,7 @@ class AdministratorController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function create(){
-      //return view("administrators.sellerRegister");
+      //return view("administrator.sellerRegister");
    }
 
    /**

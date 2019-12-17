@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class DefineForeignKeys extends Migration{
-
+    
    /**
     * Run the migrations.
     *
@@ -23,6 +23,9 @@ class DefineForeignKeys extends Migration{
     * @return void
     */
    public function down(){
-
+      Schema::table('users', function(Blueprint $table){
+         $table->dropForeign('role_id');
+         $table->dropColumn('role_id');
+      });
    }
 }

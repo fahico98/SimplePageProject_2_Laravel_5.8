@@ -65,6 +65,9 @@
                                        {{ __('User search') }}
                                     </a>
                                  @endisadmin
+                                 <a class="dropdown-item" href="{{ route('user.profile', ['id' => Auth::user()->e_mail]) }}">
+                                    {{ __('Profile') }}
+                                 </a>
                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                        {{ __('Logout') }}

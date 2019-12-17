@@ -25,7 +25,7 @@ class HomeController extends Controller{
       if(Auth::check()){
          $user = Auth::user();
          if(Auth::user()->isAdmin()){
-            return view("administrators.admin", compact("user"));
+            return view("administrator.admin", compact("user"));
          }else{
             return view("home", compact("user"));
          }
