@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -25,8 +26,16 @@ class UserController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function profilePicture(Request $request){
+      $user = User::where("e_mail", $request->e_mail)->first();
       if($request->hasFile("profilePicture")){
-         $request->file("profilePicture")->store("public");
+         if($user->profile_picture === "public/defaultUserPhoto.jpg"){
+            $path = Storage::putFile('public', $request->file('profilePicture'));
+         }else{
+            Storage::delete($user->profile_picture);
+            $path = Storage::putFile("public", $request->file('profilePicture'));
+         }
+         $user->update(["profile_picture" => $path]);
       }
+      return view("user.profile")->with(["user" => $user]);
    }
 }
