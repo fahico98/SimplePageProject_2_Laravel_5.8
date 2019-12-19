@@ -3,7 +3,19 @@
 @section('content')
    <div class="container">
       <div class="row justify-content-center">
-         <div class="col-md-8">
+         <div class="col-md-3">
+            <div class="card">
+               <div class="card-header">Suggestions for you</div>
+               <div class="card-body">
+                  <h5>Recomended for you...!</h5>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-9">
+
+
+
+            <!--
             <div class="card">
                <div class="card-header">User Panel</div>
                <div class="card-body">
@@ -15,6 +27,8 @@
                   You are logged in {{ $user->name }}...!
                </div>
             </div>
+            -->
+
          </div>
       </div>
    </div>

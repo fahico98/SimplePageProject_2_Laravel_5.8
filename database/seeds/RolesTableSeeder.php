@@ -12,7 +12,7 @@ class RolesTableSeeder extends Seeder{
    public function run(){
 
       // Make empty the "roles" table before seed it...
-      //DB::table("roles")->truncate();
+      // DB::table("roles")->truncate();
 
       DB::table("roles")->insert([
          "name" => "administrator"

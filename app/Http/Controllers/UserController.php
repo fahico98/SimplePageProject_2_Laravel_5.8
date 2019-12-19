@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 
 class UserController extends Controller{
-   
+
    /**
     * Display the user profile.
     *
@@ -15,8 +15,8 @@ class UserController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function profile($e_mail){
-      $user = User::where("e_mail", "=", $e_mail)->first(); 
-      return view("user.profile")->with(["user" => $user]);
+      $user = User::where("e_mail", "=", $e_mail)->first();
+      return(view("user.profile")->with(["user" => $user]));
    }
 
    /**
@@ -36,6 +36,6 @@ class UserController extends Controller{
          }
          $user->update(["profile_picture" => $path]);
       }
-      return view("user.profile")->with(["user" => $user]);
+      return(redirect()->route("user.profile", ["e_mail" => $user->e_mail]));
    }
 }

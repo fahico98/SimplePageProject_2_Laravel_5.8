@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder{
    public function run(){
 
       // Make empty the "users" table before seed it...
-      DB::table('users')->truncate();
+      // DB::table('users')->truncate();
 
       DB::table('users')->insert([
          "name" => "Fahico",
