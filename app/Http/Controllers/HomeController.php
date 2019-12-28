@@ -22,9 +22,6 @@ class HomeController extends Controller{
     * @return \Illuminate\Contracts\Support\Renderable
     */
    public function index(){
-
-      
-      
       if(Auth::check()){
          $user = Auth::user();
          if(Auth::user()->isAdmin()){

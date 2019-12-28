@@ -4,14 +4,19 @@ $(document).ready(function(){
    $(document).on("click", "#image", function(event){
       event.preventDefault();
       $('#blank').attr('hidden', true);
-      //$('#blank').attr('src', "#");
-      $("#profilePictureInput").val("");
-      $("#triggerModalButton").trigger("click");
+      $("#profilePicture").val("");
+      $("#triggerProfilePictureModalButton").trigger("click");
    });
 
-   $(document).on("change", "#profilePictureInput", function(event){
+   $(document).on("change", "#profilePicture", function(event){
       event.preventDefault();
       picturePreview(this);
+   });
+
+   $(document).on("keyup", "#biography", function(event){
+      event.preventDefault();
+      var bio = $(this).val();
+      console.log(">>>" + bio + "<<<");
    });
 
 });

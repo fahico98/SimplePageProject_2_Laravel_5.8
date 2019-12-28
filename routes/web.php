@@ -29,6 +29,7 @@ Route::resource('admin/users', 'AdministratorController');
 
 Route::get("user/profile/{e_mail}", "UserController@profile")->name("user.profile");
 Route::post("user/profile_picture", "UserController@profilePicture")->name("user.profilePicture");
+Route::post("user/bio", "UserController@bio")->name("user.bio");
 
 // Auth::routes(["verify" => true]);
 
