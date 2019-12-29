@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler{
        * Hand the exception throwed when you try to access post routes from its link...
        */
       if($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException){
-         return (Auth::check()) ? redirect("/") : redirect("/login");
+         return Auth::check() ? redirect("/") : redirect("/login");
       }
       return parent::render($request, $exception);
    }

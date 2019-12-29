@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\User;
+use App\Post;
 
 class UserController extends Controller{
 
@@ -56,12 +57,22 @@ class UserController extends Controller{
     */
    public function bio(Request $request){
       $user = User::where("e_mail", $request->e_mail)->first();
-      if($request){
-         $user->update([
-            "occupation" => $request->occupation,
-            "biography" => $request->biography
-         ]);
-      }
+      $user->update([
+         "occupation" => $request->occupation,
+         "biography" => $request->biography
+      ]);
       return(redirect()->route("user.profile", ["e_mail" => $user->e_mail]));
+   }
+
+   /**
+    * Load user posts from database.
+    *
+    * @param String $e_mial
+    */
+   public function loadPosts(){
+      $email = Input::get("email");
+      $id = User::select("id")->where("e_mail", "=", $email)->first();
+      $posts = Post::where("user_id", "=", $id)->get();
+      return(view("user.profile_tabs.posts")->with(["posts" => $posts]));
    }
 }

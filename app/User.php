@@ -24,7 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail{
       'e_mail',
       'password',
       "role_id",
-      "profile_picture"
+      "profile_picture",
+      "occupation",
+      "biography"
    ];
 
    /**
@@ -46,6 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail{
 
    public function role(){
       return $this->belongsTo(Role::class);
+   }
+
+   public function posts(){
+      return $this->hasMany(Post::class);
    }
 
    public function isAdmin(){
