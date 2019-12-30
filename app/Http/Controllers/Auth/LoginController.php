@@ -43,4 +43,15 @@ class LoginController extends Controller{
    public function username(){
       return 'e_mail';
    }
+
+   /**
+     * The user has been authenticated.
+     *
+     * @param  mixed  $user
+     * @return mixed
+     */
+   public function authenticated($user){
+      session(['email' => $user->e_mail]);
+      return redirect()->intended($this->redirectPath());
+   }
 }

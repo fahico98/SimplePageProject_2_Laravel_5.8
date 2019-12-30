@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
 
-class CustomBladeDirectivesProvider extends ServiceProvider{
+class CustomBladeDirectivesServiceProvider extends ServiceProvider{
 
    /**
     * Register services.
@@ -30,6 +30,14 @@ class CustomBladeDirectivesProvider extends ServiceProvider{
 
       Blade::if("isseller", function(){
          return Auth::user() ? (Auth::user()->role->name === "seller") : false;
+      });
+
+      Blade::if("insession", function($email){
+         return session()->has("email") ? session("email") === $email : false;
+      });
+
+      Blade::if("outsession", function($email){
+         return session()->has("email") ? session("email") !== $email : true;
       });
    }
 }
