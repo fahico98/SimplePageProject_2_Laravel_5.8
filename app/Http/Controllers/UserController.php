@@ -71,8 +71,29 @@ class UserController extends Controller{
     */
    public function loadPosts(){
       $email = Input::get("email");
-      $id = User::select("id")->where("e_mail", "=", $email)->first();
-      $posts = Post::where("user_id", "=", $id)->get();
-      return(view("user.profile_tabs.posts")->with(["posts" => $posts]));
+      $id = User::select("id")->where("e_mail", "=", $email)->first()->id;
+      $posts = Post::where("user_id", "=", $id)->orderBy("created_at", "desc")->get();
+      return view("user.profile_tabs.posts")->with([
+         "posts" => $posts,
+         "email" => $email
+      ]);
+   }
+
+   /**
+    * Save a new post into database.
+    *
+    * @param  \Illuminate\Http\Request
+    */
+   public function newPost(Request $request){
+      $post = new Post;
+      $userId = User::select("id")->where("e_mail", "=", $request->email)->first()->id;
+      $post->user_id = $userId;
+      $post->post_permission_id = $request->permission;
+      $post->title = $request->postTitle;
+      $post->content = $request->postContent;
+      $post->likes = 0;
+      $post->dislikes = 0;
+      $post->save();
+      return(redirect()->route("user.profile", ["e_mail" => $request->email]));
    }
 }

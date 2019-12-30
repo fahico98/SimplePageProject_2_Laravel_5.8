@@ -1,8 +1,7 @@
 
 $(document).ready(function(){
 
-   var email = $("#emailLink").text();
-   loadPosts(email);
+   loadPosts($("#emailLink").text());
 
    $(document).on("click", "#image", function(event){
       event.preventDefault();
@@ -40,6 +39,10 @@ $(document).ready(function(){
    });
 
    $(document).on("click", "#emailLink", function(event){
+      event.preventDefault();
+   });
+
+   $(document).on("click", ".nav-link", function(event){
       event.preventDefault();
    });
 

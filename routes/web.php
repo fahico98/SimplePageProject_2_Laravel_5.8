@@ -28,6 +28,7 @@ Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 Route::resource('admin/users', 'AdministratorController');
 
 Route::get("user/profile/load_posts", "UserController@loadPosts");
+Route::get("user/profile/new_post", "UserController@newPost")->name("user.newPost");
 Route::get("user/profile/{e_mail}", "UserController@profile")->name("user.profile");
 Route::post("user/profile_picture", "UserController@profilePicture")->name("user.profilePicture");
 Route::post("user/bio", "UserController@bio")->name("user.bio");
