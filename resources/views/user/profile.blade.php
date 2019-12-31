@@ -4,12 +4,12 @@
 @section('content')
    <div class="container">
       <div class="row justify-content-center">
-         <div class="col-md-3">
+         <div class="col-md-3 mx-0">
             @insession($user->e_mail)
-               <img src="{{ Storage::url($user->profile_picture) }}" width="250px" class="rounded" id="image"
+               <img src="{{ Storage::url($user->profile_picture) }}" width="100%" class="rounded" id="image"
                   style="cursor: pointer">
             @else
-               <img src="{{ Storage::url($user->profile_picture) }}" width="250px" class="rounded">
+               <img src="{{ Storage::url($user->profile_picture) }}" width="100%" class="rounded">
             @endinsession
             <h2 class="mt-2 mb-0"><strong>{{ $user->name }}&nbsp;{{ $user->lastname }}</strong></h2>
             <h5 class="mt-1"><a href="" id="emailLink">{{ $user->e_mail }}</a></h5>
@@ -18,8 +18,11 @@
                   <p><a href="" id="bioLink"><strong>+</strong>&nbsp;Add a bio</a></p>
                @endinsession
             @else
-               <p><strong>{{ $user->occupation }}</strong><br>{{ $user->biography }}</p>
+               <p class="mb-2"><strong>{{ $user->occupation }}</strong><br>{{ $user->biography }}</p>
             @endif
+            @outsession($user->e_mail)
+               <button class="btn btn-primary btn-sm w-100" id="followButton">Follow</button>
+            @endoutsession
          </div>
          <div class="col-md-9">
             <ul class="nav nav-tabs">

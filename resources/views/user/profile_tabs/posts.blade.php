@@ -21,7 +21,7 @@
                   <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <form method="GET" action="{{ route('user.newPost') }}">
+            <form method="GET" action="{{ route('user.post.create') }}">
                @csrf
                <div class="modal-body">
                   <div class="form-group row mx-2 my-2">
@@ -58,6 +58,9 @@
          </div>
       </div>
    </div>
+
+   <div id="modalUpdatePostDiv"></div>
+   <div id="modalDeletePostDiv"></div>
 @endinsession
 
 @forelse($posts as $post)
@@ -74,11 +77,11 @@
             </div>
             @insession($email)
                <div class="col-1">
-                  <a href="#" class="text-danger">
-                     <i class="fas fa-trash-alt mr-1" title="Delete post" id="{{$post->id}}"></i>
+                  <a href="#" id="{{$post->id}}" class="text-danger deletePostLink">
+                     <i class="fas fa-trash-alt mr-1" title="Delete post"></i>
                   </a>
-                  <a href="#" class="text-primary">
-                     <i class="fas fa-edit" title="Edit post" id="{{$post->id}}"></i>
+                  <a href="#" id="{{$post->id}}" class="text-primary updatePostLink">
+                     <i class="fas fa-edit" title="Edit post"></i>
                   </a>
                </div>
             @endinsession

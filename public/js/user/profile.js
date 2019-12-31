@@ -72,7 +72,7 @@ function loadPosts(email){
    });
 
    $.ajax({
-      url: "/user/profile/load_posts?email=" + email,
+      url: "/user/post/load_posts?email=" + email,
       type: "GET",
       dataType: "html",
       processData: false,
