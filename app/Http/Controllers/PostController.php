@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use App\User;
 use App\Post;
 
@@ -79,8 +79,8 @@ class PostController extends Controller{
    }
 
    public function modalUpdateForm(){
-      $postId = Input::get("id");
-      $post = Post::where("id", "=", $postId)->first();
+      $id = Input::get("id");
+      $post = Post::where("id", "=", $id)->first();
       return view("user.profile_tabs.modal_update_form")->with(["post" => $post]);
    }
 

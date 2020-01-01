@@ -21,7 +21,11 @@
                <p class="mb-2"><strong>{{ $user->occupation }}</strong><br>{{ $user->biography }}</p>
             @endif
             @outsession($user->e_mail)
-               <button class="btn btn-primary btn-sm w-100" id="followButton">Follow</button>
+               @auth
+                  <button class="btn btn-primary btn-sm w-100" id="followButton">Follow</button>
+                  <input type="hidden" id="follower" value="{{ session("email") }}">
+                  <input type="hidden" id="followed" value="{{ $user->e_mail }}">
+               @endauth
             @endoutsession
          </div>
          <div class="col-md-9">
@@ -34,7 +38,7 @@
                </li>
                @insession($user->e_mail)
                   <li class="nav-item">
-                     <a id="followedLink" class="nav-link" href="#">Followed</a>
+                     <a id="followingLink" class="nav-link" href="#">Following</a>
                   </li>
                   <li class="nav-item">
                      <a id="messagesLink" class="nav-link" href="#">Messages</a>
