@@ -77,10 +77,10 @@
             </div>
             @insession($email)
                <div class="col-1">
-                  <a href="#" id="{{$post->id}}" class="text-danger deletePostLink">
+                  <a href="#" id="{{ $post->id }}" class="text-danger deletePostLink">
                      <i class="fas fa-trash-alt mr-1" title="Delete post"></i>
                   </a>
-                  <a href="#" id="{{$post->id}}" class="text-primary updatePostLink">
+                  <a href="#" id="{{ $post->id }}" class="text-primary updatePostLink">
                      <i class="fas fa-edit" title="Edit post"></i>
                   </a>
                </div>

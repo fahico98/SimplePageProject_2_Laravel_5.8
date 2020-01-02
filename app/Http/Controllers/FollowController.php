@@ -23,4 +23,13 @@ class FollowController extends Controller{
          "followed_id" => $followedId
       ]);
    }
+
+   public function unfollow(){
+      $followerId = User::where("e_mail", "=", Input::get("followerEmail"))->first()->id;
+      $followedId = User::where("e_mail", "=", Input::get("followedEmail"))->first()->id;
+      DB::table("follower_followed")
+         ->where("follower_id", "=", $followerId)
+         ->where("followed_id", "=", $followedId)
+         ->delete();
+   }
 }

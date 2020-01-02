@@ -44,15 +44,13 @@ $(document).ready(function(){
 
    $(document).on("click", ".nav-link", function(event){
       event.preventDefault();
-      if(!$(this).hasClass("active")){
-         $(".nav-link").removeClass("active");
-         $(this).addClass("active");
-         if($(this).text().localeCompare("Posts") === 0){
-            loadPosts($("#emailLink").text());
-         }else if($(this).text().localeCompare("Followers") === 0){
+      $(".nav-link").removeClass("active");
+      $(this).addClass("active");
+      if($(this).text().localeCompare("Posts") === 0){
+         loadPosts($("#emailLink").text());
+      }else if($(this).text().localeCompare("Followers") === 0){
 
-            loadFollowers($("#emailLink").text());
-         }
+         loadFollowers($("#emailLink").text());
       }
    });
 
@@ -95,7 +93,6 @@ function loadPosts(email){
       async: false
    });
 }
-
 
 function loadFollowers(email){
    $.ajaxSetup({
