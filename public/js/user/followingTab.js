@@ -11,18 +11,17 @@ $(document).ready(function(){
 });
 
 function unfollow(followerEmail, followedEmail){
-   var output;
    $.ajaxSetup({
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
    });
    $.ajax({
-      url: "/user/followers/unfollow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
+      url: "/user/following/unfollow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
       type: "GET",
       processData: false,
       success: function(){
-         $("#followersLink").trigger("click");
+         loadFollowing(followerEmail);
       },
       async: false
    });

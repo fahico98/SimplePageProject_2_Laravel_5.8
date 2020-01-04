@@ -44,20 +44,25 @@ $(document).ready(function(){
 
    $(document).on("click", ".nav-link", function(event){
       event.preventDefault();
-      $(".nav-link").removeClass("active");
-      $(this).addClass("active");
-      if($(this).text().localeCompare("Posts") === 0){
-         loadPosts($("#emailLink").text());
-      }else if($(this).text().localeCompare("Followers") === 0){
-
-         loadFollowers($("#emailLink").text());
+      if(!$(this).hasClass("active")){
+         $(".nav-link").removeClass("active");
+         $(this).addClass("active");
+         if($(this).text().localeCompare("Posts") === 0){
+            loadPosts($("#emailLink").text());
+         }else if($(this).text().localeCompare("Following") === 0){
+            loadFollowing($("#emailLink").text());
+         }
       }
    });
 
-   $(document).on("click", "#followButton", function(event){
+   $(document).on("click", "#profileFollowButton", function(event){
       event.preventDefault();
-      console.log("Click...!");
       follow($("#follower").val(), $("#followed").val());
+   });
+
+   $(document).on("click", "#profileUnfollowButton", function(event){
+      event.preventDefault();
+      unfollowFromProfile($("#follower").val(), $("#followed").val());
    });
 });
 
@@ -94,14 +99,14 @@ function loadPosts(email){
    });
 }
 
-function loadFollowers(email){
+function loadFollowing(email){
    $.ajaxSetup({
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
    });
    $.ajax({
-      url: "/user/followers?email=" + email,
+      url: "/user/following?email=" + email,
       type: "GET",
       dataType: "html",
       processData: false,
@@ -119,14 +124,31 @@ function follow(followerEmail, followedEmail){
       }
    });
    $.ajax({
-      url: "/user/followers/follow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
+      url: "/user/following/follow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
       type: "GET",
       dataType: "html",
       processData: false,
       success: function(){
-         console.log("Following done...!");
-         //$("#profileContent").html(response);
+         location.reload();
       },
       async: false
    });
 }
+
+function unfollowFromProfile(followerEmail, followedEmail){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/following/unfollow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
+      type: "GET",
+      processData: false,
+      success: function(){
+         location.reload();
+      },
+      async: false
+   });
+}
+

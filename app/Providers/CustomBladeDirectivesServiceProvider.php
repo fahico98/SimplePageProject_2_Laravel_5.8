@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\User;
 
 class CustomBladeDirectivesServiceProvider extends ServiceProvider{
 
@@ -38,6 +40,15 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
 
       Blade::if("outsession", function($email){
          return session()->has("email") ? session("email") !== $email : true;
+      });
+
+      Blade::if("following", function($followerEmail, $followedEmail){
+         $followerId = User::where("e_mail", "=", $followerEmail)->first()->id;
+         $followedId = User::where("e_mail", "=", $followedEmail)->first()->id;
+         return DB::table('follower_followed')
+            ->where("follower_id", "=", $followerId)
+            ->where("followed_id", "=", $followedId)
+            ->exists();
       });
    }
 }

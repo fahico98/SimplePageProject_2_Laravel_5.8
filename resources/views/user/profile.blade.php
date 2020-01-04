@@ -20,13 +20,17 @@
             @else
                <p class="mb-2"><strong>{{ $user->occupation }}</strong><br>{{ $user->biography }}</p>
             @endif
-            @outsession($user->e_mail)
-               @auth
-                  <button class="btn btn-primary btn-sm w-100" id="followButton">Follow</button>
+            @auth
+               @outsession($user->e_mail)
+                  @following(session("email"), $user->e_mail)
+                     <button class="btn btn-outline-secondary btn-sm w-100" id="profileUnfollowButton">Unfollow</button>
+                  @else
+                     <button class="btn btn-primary btn-sm w-100" id="profileFollowButton">Follow</button>
+                  @endfollowing
                   <input type="hidden" id="follower" value="{{ session("email") }}">
                   <input type="hidden" id="followed" value="{{ $user->e_mail }}">
-               @endauth
-            @endoutsession
+               @endoutsession
+            @endauth
          </div>
          <div class="col-md-9">
             <ul class="nav nav-tabs">

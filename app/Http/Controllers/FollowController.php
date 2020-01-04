@@ -9,10 +9,10 @@ use App\User;
 
 class FollowController extends Controller{
 
-   public function followers(){
+   public function following(){
       $email = Input::get("email");
       $user = User::where("e_mail", "=", $email)->first();
-      return view("user.profile_tabs.followers")->with(["followers" => $user->followers]);
+      return view("user.profile_tabs.following")->with(["following" => $user->followed]);
    }
 
    public function follow(){
