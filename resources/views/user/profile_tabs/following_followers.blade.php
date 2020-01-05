@@ -1,5 +1,5 @@
 
-@forelse($following as $key => $user)
+@forelse($users as $key => $user)
    @if($key % 3 === 0)
       <div class="row mx-0 mb-2">
          <div class="col-md-4 mx-0 px-1">
@@ -16,11 +16,25 @@
                   </p>
                </div>
                <div class="card-footer">
-                  <button class="btn btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">Unfollow</button>
+                  @if($flag === "followers")
+                     @following(session("email"), $user->e_mail)
+                        <button class="btn btn-sm w-100 btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">
+                           Unfollow
+                        </button>
+                     @else
+                        <button class="btn btn-sm w-100 btn-primary followButton" id="{{ $user->e_mail }}">
+                           Follow
+                        </button>
+                     @endfollowing
+                  @elseif($flag === "following")
+                     <button class="btn btn-sm w-100 btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">
+                        Unfollow
+                     </button>
+                  @endif
                </div>
             </div>
          </div>
-   @elseif(($key - 2) % 3 === 0 || $key === count($following) - 1)
+   @elseif(($key - 2) % 3 === 0 || $key === count($users) - 1)
          <div class="col-md-4 mx-0 px-1">
             <div class="card bg-light mb-3 h-100" style="max-width: 18rem;">
                <div onClick="location.href='{{ route('user.profile', ['id' => $user->e_mail]) }}'"
@@ -35,7 +49,21 @@
                   </p>
                </div>
                <div class="card-footer">
-                  <button class="btn btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">Unfollow</button>
+                  @if($flag === "followers")
+                     @following(session("email"), $user->e_mail)
+                        <button class="btn btn-sm w-100 btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">
+                           Unfollow
+                        </button>
+                     @else
+                        <button class="btn btn-sm w-100 btn-primary followButton" id="{{ $user->e_mail }}">
+                           Follow
+                        </button>
+                     @endfollowing
+                  @elseif($flag === "following")
+                     <button class="btn btn-sm w-100 btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">
+                        Unfollow
+                     </button>
+                  @endif
                </div>
             </div>
          </div>
@@ -55,7 +83,21 @@
                </p>
             </div>
             <div class="card-footer">
-               <button class="btn btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">Unfollow</button>
+               @if($flag === "followers")
+                  @following(session("email"), $user->e_mail)
+                     <button class="btn btn-sm w-100 btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">
+                        Unfollow
+                     </button>
+                  @else
+                     <button class="btn btn-sm w-100 btn-primary followButton" id="{{ $user->e_mail }}">
+                        Follow
+                     </button>
+                  @endfollowing
+               @elseif($flag === "following")
+                  <button class="btn btn-sm w-100 btn-outline-secondary unfollowButton" id="{{ $user->e_mail }}">
+                     Unfollow
+                  </button>
+               @endif
             </div>
          </div>
       </div>
@@ -64,4 +106,4 @@
    <h4>No users...!</h4>
 @endforelse
 
-<script src="{{ asset('js/user/followingTab.js') }}" defer></script>
+<input type="hidden" id="flag" value="{{ $flag }}">

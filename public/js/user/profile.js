@@ -51,13 +51,15 @@ $(document).ready(function(){
             loadPosts($("#emailLink").text());
          }else if($(this).text().localeCompare("Following") === 0){
             loadFollowing($("#emailLink").text());
+         }else if($(this).text().localeCompare("Followers") === 0){
+            loadFollowers($("#emailLink").text());
          }
       }
    });
 
    $(document).on("click", "#profileFollowButton", function(event){
       event.preventDefault();
-      follow($("#follower").val(), $("#followed").val());
+      followFromProfile($("#follower").val(), $("#followed").val());
    });
 
    $(document).on("click", "#profileUnfollowButton", function(event){
@@ -106,7 +108,7 @@ function loadFollowing(email){
       }
    });
    $.ajax({
-      url: "/user/following?email=" + email,
+      url: "/user/following_followers?email=" + email + "&flag=following",
       type: "GET",
       dataType: "html",
       processData: false,
@@ -117,14 +119,32 @@ function loadFollowing(email){
    });
 }
 
-function follow(followerEmail, followedEmail){
+function loadFollowers(email){
    $.ajaxSetup({
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
    });
    $.ajax({
-      url: "/user/following/follow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
+      url: "/user/following_followers?email=" + email + "&flag=followers",
+      type: "GET",
+      dataType: "html",
+      processData: false,
+      success: function(response){
+         $("#profileContent").html(response);
+      },
+      async: false
+   });
+}
+
+function followFromProfile(followerEmail, followedEmail){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/follow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
       type: "GET",
       dataType: "html",
       processData: false,
@@ -142,7 +162,7 @@ function unfollowFromProfile(followerEmail, followedEmail){
       }
    });
    $.ajax({
-      url: "/user/following/unfollow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
+      url: "/user/unfollow?followerEmail=" + followerEmail + "&followedEmail=" + followedEmail,
       type: "GET",
       processData: false,
       success: function(){

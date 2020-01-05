@@ -34,9 +34,9 @@ Route::get("user/post/create", "PostController@create")->name("user.post.create"
 Route::get("user/post/update", "PostController@update")->name("user.post.update");
 Route::get("user/post/destroy/{id}", "PostController@destroy")->name("user.post.destroy");
 
-Route::get("user/following/unfollow", "FollowController@unfollow");
-Route::get("user/following/follow", "FollowController@follow");
-Route::get("user/following", "FollowController@following");
+Route::get("user/unfollow", "FollowController@unfollow");
+Route::get("user/follow", "FollowController@follow");
+Route::get("user/following_followers", "FollowController@followingFollowers");
 
 Route::get("user/profile/{e_mail}", "UserController@profile")->name("user.profile");
 Route::post("user/profile_picture", "UserController@profilePicture")->name("user.profilePicture");
