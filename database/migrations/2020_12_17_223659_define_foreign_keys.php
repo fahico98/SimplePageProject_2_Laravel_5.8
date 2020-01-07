@@ -26,6 +26,16 @@ class DefineForeignKeys extends Migration{
          $table->foreign("follower_id")->references("id")->on("users")->onDelete("cascade");
          $table->foreign("followed_id")->references("id")->on("users")->onDelete("cascade");
       });
+
+      Schema::table("user_like_post", function(Blueprint $table){
+         $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
+         $table->foreign("post_id")->references("id")->on("posts")->onDelete("cascade");
+      });
+
+      Schema::table("user_dislike_post", function(Blueprint $table){
+         $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
+         $table->foreign("post_id")->references("id")->on("posts")->onDelete("cascade");
+      });
    }
 
    /**
@@ -44,6 +54,15 @@ class DefineForeignKeys extends Migration{
          $table->dropForeign("posts_post_permission_id_foreign");
       });
 
+      Schema::table("user_like_post", function(Blueprint $table){
+         $table->dropForeign("user_like_post_user_id_foreign");
+         $table->dropForeign("user_like_post_post_id_foreign");
+      });
+
+      Schema::table("user_dislike_post", function(Blueprint $table){
+         $table->dropForeign("user_dislike_post_user_id_foreign");
+         $table->dropForeign("user_dislike_post_post_id_foreign");
+      });
 
       Schema::table("follower_followed", function(Blueprint $table){
          $table->dropForeign("follower_followed_follower_id_foreign");

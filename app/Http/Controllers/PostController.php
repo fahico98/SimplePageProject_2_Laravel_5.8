@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
@@ -87,5 +88,71 @@ class PostController extends Controller{
    public function modalDeleteForm(){
       $id = Input::get("id");
       return view("user.profile_tabs.modal_delete_form")->with(["id" => $id]);
+   }
+
+   public function like(){
+      $user = User::where("e_mail", "=", session("email"))->first();
+      $post = Post::where("id", "=", Input::get("id"))->first();
+      $post->update(["likes" => $post->likes + 1]);
+      DB::table("user_like_post")->insert([
+         "user_id" => $user->id,
+         "post_id" => $post->id
+      ]);
+      /*
+      $dislike = DB::table("user_dislike_post")
+         ->where("user_id", "=", $user->id)
+         ->where("post_id", "=", $post->id)
+         ->exists();
+      if($dislike){
+         $post->update(["dislikes" => $post->dislikes - 1]);
+         DB::table("user_dislike_post")
+            ->where("user_id", "=", $user->id)
+            ->where("post_id", "=", $post->id)
+            ->delete();
+      }
+      */
+   }
+
+   public function dislike(){
+      $user = User::where("e_mail", "=", session("email"))->first();
+      $post = Post::where("id", "=", Input::get("id"))->first();
+      $post->update(["dislikes" => $post->dislikes + 1]);
+      DB::table("user_dislike_post")->insert([
+         "user_id" => $user->id,
+         "post_id" => $post->id
+      ]);
+      /*
+      $like = DB::table("user_like_post")
+         ->where("user_id", "=", $user->id)
+         ->where("post_id", "=", $post->id)
+         ->exists();
+      if($like){
+         $post->update(["likes" => $post->likes - 1]);
+         DB::table("user_like_post")
+            ->where("user_id", "=", $user->id)
+            ->where("post_id", "=", $post->id)
+            ->delete();
+      }
+      */
+   }
+
+   public function undoLike(){
+      $user = User::where("e_mail", "=", session("email"))->first();
+      $post = Post::where("id", "=", Input::get("id"))->first();
+      $post->update(["likes" => $post->likes - 1]);
+      DB::table("user_like_post")
+         ->where("user_id", "=", $user->id)
+         ->where("post_id", "=", $post->id)
+         ->delete();
+   }
+
+   public function undoDislike(){
+      $user = User::where("e_mail", "=", session("email"))->first();
+      $post = Post::where("id", "=", Input::get("id"))->first();
+      $post->update(["dislikes" => $post->dislikes - 1]);
+      DB::table("user_dislike_post")
+         ->where("user_id", "=", $user->id)
+         ->where("post_id", "=", $post->id)
+         ->delete();
    }
 }

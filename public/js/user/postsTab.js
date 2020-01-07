@@ -72,6 +72,64 @@ $(document).ready(function(){
       modalDeleteForm($(this).attr("id"));
       $("#triggerDeletePostModalButton").trigger("click");
    });
+
+   $(document).on("click", ".likePostLink", function(event){
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var likes = $("#" + id + ".likeNumber").text();
+      $("#" + id + ".likeNumber").text(parseInt(likes, 10) + 1);
+      like(id);
+      $(this)
+         .removeClass("text-secondary")
+         .removeClass("likePostLink")
+         .addClass("text-success")
+         .addClass("undoLikePostLink");
+      if($("#" + id + ".undoDislikePostLink").length){
+         $("#" + id + ".undoDislikePostLink").trigger("click");
+      }
+   });
+
+   $(document).on("click", ".dislikePostLink", function(event){
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var dislikes = $("#" + id + ".dislikeNumber").text();
+      $("#" + id + ".dislikeNumber").text(parseInt(dislikes, 10) + 1);
+      dislike(id);
+      $(this)
+         .removeClass("text-secondary")
+         .removeClass("dislikePostLink")
+         .addClass("text-danger")
+         .addClass("undoDislikePostLink");
+      if($("#" + id + ".undoLikePostLink").length){
+         $("#" + id + ".undoLikePostLink").trigger("click");
+      }
+   });
+
+   $(document).on("click", ".undoLikePostLink", function(event){
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var likes = $("#" + id + ".likeNumber").text();
+      $("#" + id + ".likeNumber").text(parseInt(likes, 10) - 1);
+      $(this)
+         .removeClass("text-success")
+         .removeClass("undoLikePostLink")
+         .addClass("text-secondary")
+         .addClass("likePostLink");
+      undoLike(id);
+   });
+
+   $(document).on("click", ".undoDislikePostLink", function(event){
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var dislikes = $("#" + id + ".dislikeNumber").text();
+      $("#" + id + ".dislikeNumber").text(parseInt(dislikes, 10) - 1);
+      $(this)
+         .removeClass("text-danger")
+         .removeClass("undoDislikePostLink")
+         .addClass("text-secondary")
+         .addClass("dislikePostLink");
+      undoDislike(id);
+   });
 });
 
 function modalUpdateForm(id){
@@ -106,6 +164,62 @@ function modalDeleteForm(id){
       success: function(response){
          $("#modalDeletePostDiv").html(response);
       },
+      async: false
+   });
+}
+
+function like(postId){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/post/like?id=" + postId,
+      type: "GET",
+      processData: false,
+      async: false
+   });
+}
+
+function dislike(postId){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/post/dislike?id=" + postId,
+      type: "GET",
+      processData: false,
+      async: false
+   });
+}
+
+function undoLike(postId){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/post/undo_like?id=" + postId,
+      type: "GET",
+      processData: false,
+      async: false
+   });
+}
+
+function undoDislike(postId){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/post/undo_dislike?id=" + postId,
+      type: "GET",
+      processData: false,
       async: false
    });
 }

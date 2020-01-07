@@ -50,5 +50,29 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
             ->where("followed_id", "=", $followedId)
             ->exists();
       });
+
+      Blade::if("liked", function($postId){
+         if(Auth::user()){
+            $userId = User::where("e_mail", "=", session("email"))->first()->id;
+            return DB::table("user_like_post")
+               ->where("user_id", "=", $userId)
+               ->where("post_id", "=", $postId)
+               ->exists();
+         }else{
+            return false;
+         }
+      });
+
+      Blade::if("disliked", function($postId){
+         if(Auth::user()){
+            $userId = User::where("e_mail", "=", session("email"))->first()->id;
+            return DB::table("user_dislike_post")
+               ->where("user_id", "=", $userId)
+               ->where("post_id", "=", $postId)
+               ->exists();
+         }else{
+            return false;
+         }
+      });
    }
 }

@@ -147,5 +147,6 @@
       </div>
    @endif
    <script src="{{ asset('js/user/profile.js') }}" defer></script>
+   <script src="{{ asset('js/user/postsTab.js') }}" defer></script>
    <script src="{{ asset('js/user/followingFollowerTab.js') }}" defer></script>
 @endsection

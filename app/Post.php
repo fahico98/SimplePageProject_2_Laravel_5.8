@@ -24,6 +24,14 @@ class Post extends Model{
       return $this->belongsTo(User::class);
    }
 
+   public function usersWhoLike(){
+      return $this->belongsToMany(User::class, "user_like_post");
+   }
+
+   public function usersWhoDislike(){
+      return $this->belongsToMany(User::class, "user_dislike_post");
+   }
+
    public function postPermission(){
       return $this->belongsTo(PostPermission::class);
    }
