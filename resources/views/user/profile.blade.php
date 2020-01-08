@@ -35,23 +35,24 @@
          <div class="col-md-9">
             <ul class="nav nav-tabs">
                <li class="nav-item">
-                  <a id="postsLink" class="nav-link active" href="#">Posts</a>
+                  <a id="postsLink" class="nav-link {{ ($tab === "Posts") ? "active" : }}" href="#">Posts</a>
                </li>
                <li class="nav-item">
-                  <a id="followersLink" class="nav-link" href="#">Followers</a>
+                  <a id="followersLink" class="nav-link {{ ($tab === "Followers") ? "active" : }}" href="#">Followers</a>
                </li>
                @insession($user->e_mail)
                   <li class="nav-item">
-                     <a id="followingLink" class="nav-link" href="#">Following</a>
+                     <a id="followingLink" class="nav-link {{ ($tab === "Following") ? "active" : }}" href="#">Following</a>
                   </li>
                   <li class="nav-item">
-                     <a id="messagesLink" class="nav-link" href="#">Messages</a>
+                     <a id="messagesLink" class="nav-link {{ ($tab === "Messages") ? "active" : }}" href="#">Messages</a>
                   </li>
                   <li class="nav-item">
-                     <a id="settingsLink" class="nav-link" href="#">Settings</a>
+                     <a id="settingsLink" class="nav-link {{ ($tab === "Settings") ? "active" : }}" href="#">Settings</a>
                   </li>
                @endinsession
             </ul>
+            @yield("profileContent")
             <div class="mt-3" id="profileContent"></div>
          </div>
       </div>
@@ -149,4 +150,5 @@
    <script src="{{ asset('js/user/profile.js') }}" defer></script>
    <script src="{{ asset('js/user/postsTab.js') }}" defer></script>
    <script src="{{ asset('js/user/followingFollowerTab.js') }}" defer></script>
+   <script src="{{ asset('js/user/messagesTab.js') }}" defer></script>
 @endsection

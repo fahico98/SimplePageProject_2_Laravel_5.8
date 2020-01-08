@@ -53,6 +53,8 @@ $(document).ready(function(){
             loadFollowing($("#emailLink").text());
          }else if($(this).text().localeCompare("Followers") === 0){
             loadFollowers($("#emailLink").text());
+         }else if($(this).text().localeCompare("Messages") === 0){
+            loadMessages($("emailLink").text());
          }
       }
    });
@@ -66,6 +68,8 @@ $(document).ready(function(){
       event.preventDefault();
       unfollowFromProfile($("#follower").val(), $("#followed").val());
    });
+
+   $(document).on("click", "")
 });
 
 function picturePreview(input){
@@ -109,6 +113,24 @@ function loadFollowing(email){
    });
    $.ajax({
       url: "/user/following_followers?email=" + email + "&flag=following",
+      type: "GET",
+      dataType: "html",
+      processData: false,
+      success: function(response){
+         $("#profileContent").html(response);
+      },
+      async: false
+   });
+}
+
+function loadMessages(email){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/messages?email=" + email,
       type: "GET",
       dataType: "html",
       processData: false,

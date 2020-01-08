@@ -36,6 +36,11 @@ class DefineForeignKeys extends Migration{
          $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
          $table->foreign("post_id")->references("id")->on("posts")->onDelete("cascade");
       });
+
+      Schema::table("messages", function(Blueprint $table){
+         $table->foreign("sender_id")->references("id")->on("users")->onDelete("cascade");
+         $table->foreign("recipient_id")->references("id")->on("users")->onDelete("cascade");
+      });
    }
 
    /**
@@ -67,6 +72,11 @@ class DefineForeignKeys extends Migration{
       Schema::table("follower_followed", function(Blueprint $table){
          $table->dropForeign("follower_followed_follower_id_foreign");
          $table->dropForeign("follower_followed_followed_id_foreign");
+      });
+
+      Schema::table("messages", function(Blueprint $table){
+         $table->dropForeign("messages_sender_id_foreign");
+         $table->dropForeign("messages_recipient_id_foreign");
       });
    }
 }

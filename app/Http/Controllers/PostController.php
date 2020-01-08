@@ -24,7 +24,7 @@ class PostController extends Controller{
     *
     * @param String $e_mial
     */
-   public function loadPosts(){
+   public function index(){
       $email = Input::get("email");
       $id = User::select("id")->where("e_mail", "=", $email)->first()->id;
       $posts = Post::where("user_id", "=", $id)->orderBy("created_at", "desc")->get();
@@ -98,19 +98,6 @@ class PostController extends Controller{
          "user_id" => $user->id,
          "post_id" => $post->id
       ]);
-      /*
-      $dislike = DB::table("user_dislike_post")
-         ->where("user_id", "=", $user->id)
-         ->where("post_id", "=", $post->id)
-         ->exists();
-      if($dislike){
-         $post->update(["dislikes" => $post->dislikes - 1]);
-         DB::table("user_dislike_post")
-            ->where("user_id", "=", $user->id)
-            ->where("post_id", "=", $post->id)
-            ->delete();
-      }
-      */
    }
 
    public function dislike(){
@@ -121,19 +108,6 @@ class PostController extends Controller{
          "user_id" => $user->id,
          "post_id" => $post->id
       ]);
-      /*
-      $like = DB::table("user_like_post")
-         ->where("user_id", "=", $user->id)
-         ->where("post_id", "=", $post->id)
-         ->exists();
-      if($like){
-         $post->update(["likes" => $post->likes - 1]);
-         DB::table("user_like_post")
-            ->where("user_id", "=", $user->id)
-            ->where("post_id", "=", $post->id)
-            ->delete();
-      }
-      */
    }
 
    public function undoLike(){

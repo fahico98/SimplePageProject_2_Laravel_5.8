@@ -24,8 +24,11 @@ class UserController extends Controller{
     * @param  String  $e_mail
     * @return \Illuminate\Http\Response
     */
-   public function profile($e_mail){
+   public function profile($e_mail, $tab){
       $user = User::where("e_mail", "=", $e_mail)->first();
+      if($tab === "Posts"){
+
+      }
       return(view("user.profile")->with(["user" => $user]));
    }
 
