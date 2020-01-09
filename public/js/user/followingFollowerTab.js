@@ -10,11 +10,12 @@ $(document).ready(function(){
          unfollow(ownEmail, userEmail);
       }else if(flag.localeCompare("followers") === 0){
          unfollow(userEmail, ownEmail);
-         $(this).removeClass("btn-outline-secondary");
-         $(this).removeClass("unfollowButton");
-         $(this).addClass("followButton");
-         $(this).addClass("btn-primarty");
-         $(this).text("Follow");
+         $(this)
+            .removeClass("btn-outline-secondary")
+            .removeClass("unfollowButton")
+            .addClass("followButton")
+            .addClass("btn-primarty")
+            .text("Follow");
       }
    });
 
@@ -23,11 +24,12 @@ $(document).ready(function(){
       var userEmail = $(this).attr("id");
       var ownEmail = $("#emailLink").text();
       follow(ownEmail, userEmail);
-      $(this).removeClass("followButton");
-      $(this).removeClass("btn-primarty");
-      $(this).addClass("unfollowButton");
-      $(this).addClass("btn-outline-secondary");
-      $(this).text("Unfollow");
+      $(this)
+         .removeClass("followButton")
+         .removeClass("btn-primarty")
+         .addClass("unfollowButton")
+         .addClass("btn-outline-secondary")
+         .text("Unfollow");
    });
 });
 
@@ -42,7 +44,7 @@ function unfollow(followerEmail, followedEmail){
       type: "GET",
       processData: false,
       success: function(){
-         if($("#flag").val().localeCompare("following") === 0){
+         if($("#tab").val().localeCompare("following") === 0){
             loadFollowing(followerEmail);
          }
       }

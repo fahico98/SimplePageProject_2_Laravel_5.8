@@ -15,7 +15,7 @@
             <h5 class="mt-1"><a href="" id="emailLink">{{ $user->e_mail }}</a></h5>
             @if($user->biography == null && $user->occupation == null)
                @insession($user->e_mail)
-                  <p><a href="" id="bioLink"><strong>+</strong>&nbsp;Add a bio</a></p>
+                  <p><a href="" id="bioLink"><i class="far fa-address-card"></i>&nbsp;Add a bio</a></p>
                @endinsession
             @else
                <p class="mb-2"><strong>{{ $user->occupation }}</strong><br>{{ $user->biography }}</p>
@@ -23,37 +23,69 @@
             @auth
                @outsession($user->e_mail)
                   @following(session("email"), $user->e_mail)
-                     <button class="btn btn-outline-secondary btn-sm w-100" id="profileUnfollowButton">Unfollow</button>
+                     <form method="GET" action="{{ route('user.unfollow', [
+                        'followerEmail' => session("email"),
+                        'followedEmail' => $user->e_mail
+                        ]) }}">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm w-100">Unfollow</button>
+                     </form>
                   @else
-                     <button class="btn btn-primary btn-sm w-100" id="profileFollowButton">Follow</button>
+                     <form method="GET" action="{{ route('user.follow', [
+                        'followerEmail' => session("email"),
+                        'followedEmail' => $user->e_mail
+                        ]) }}">
+                        <button type="submit" class="btn btn-primary btn-sm w-100">Follow</button>
+                     </form>
                   @endfollowing
-                  <input type="hidden" id="follower" value="{{ session("email") }}">
-                  <input type="hidden" id="followed" value="{{ $user->e_mail }}">
                @endoutsession
             @endauth
          </div>
          <div class="col-md-9">
             <ul class="nav nav-tabs">
                <li class="nav-item">
-                  <a id="postsLink" class="nav-link {{ ($tab === "Posts") ? "active" : }}" href="#">Posts</a>
+                  @if($tab === 'posts')
+                     <a class="nav-link active" href="#">Posts</a>
+                  @else
+                     <a href="{{ route('user.profile', ['email' => $user->e_mail, 'tab' => 'posts']) }}"
+                        class="nav-link">Posts</a>
+                  @endif
                </li>
                <li class="nav-item">
-                  <a id="followersLink" class="nav-link {{ ($tab === "Followers") ? "active" : }}" href="#">Followers</a>
+                  @if($tab === 'followers')
+                     <a href="#" class="nav-link active">Followers</a>
+                  @else
+                     <a href="{{ route('user.profile', ['email' => $user->e_mail, 'tab' => 'followers']) }}"
+                        class="nav-link">Followers</a>
+                  @endif
                </li>
                @insession($user->e_mail)
                   <li class="nav-item">
-                     <a id="followingLink" class="nav-link {{ ($tab === "Following") ? "active" : }}" href="#">Following</a>
+                     @if($tab === 'following')
+                        <a class="nav-link active" href="#">Following</a>
+                     @else
+                        <a href="{{ route('user.profile', ['email' => $user->e_mail, 'tab' => 'following']) }}"
+                           class="nav-link">Following</a>
+                     @endif
                   </li>
                   <li class="nav-item">
-                     <a id="messagesLink" class="nav-link {{ ($tab === "Messages") ? "active" : }}" href="#">Messages</a>
+                     @if($tab === 'messages')
+                        <a class="nav-link active" href="#">Messages</a>
+                     @else
+                        <a href="{{ route('user.profile', ['email' => $user->e_mail, 'tab' => 'messages']) }}"
+                           class="nav-link">Messages</a>
+                     @endif
                   </li>
                   <li class="nav-item">
-                     <a id="settingsLink" class="nav-link {{ ($tab === "Settings") ? "active" : }}" href="#">Settings</a>
+                     @if($tab === 'settings')
+                        <a class="nav-link active" href="#">Settings</a>
+                     @else
+                        <a href="{{ route('user.profile', ['email' => $user->e_mail, 'tab' => 'settings']) }}"
+                           class="nav-link">Settings</a>
+                     @endif
                   </li>
                @endinsession
             </ul>
             @yield("profileContent")
-            <div class="mt-3" id="profileContent"></div>
          </div>
       </div>
    </div>
@@ -84,7 +116,8 @@
                      </div>
                      <div class="form-group row mx-2 my-0">
                         <input name="profilePicture" id="profilePicture" type="file">
-                        <input name="e_mail" type="hidden" value="{{ $user->e_mail }}"> <!-- Hidden input -->
+                        <input name="e_mail" type="hidden" value="{{ $user->e_mail }}">      <!-- Hidden input -->
+                        <input name="tab" type="hidden" value="{{ $tab }}">                  <!-- Hidden input -->
                         <div class="d-flex justify-content-center w-100 my-0">
                            <img class="mt-3" id="blank" src="#" width="0" hidden>
                         </div>
@@ -149,6 +182,6 @@
    @endif
    <script src="{{ asset('js/user/profile.js') }}" defer></script>
    <script src="{{ asset('js/user/postsTab.js') }}" defer></script>
-   <script src="{{ asset('js/user/followingFollowerTab.js') }}" defer></script>
+   <!--<script src="{/{ asset('js/user/followingFollowerTab.js') }}" defer></script>-->
    <script src="{{ asset('js/user/messagesTab.js') }}" defer></script>
 @endsection

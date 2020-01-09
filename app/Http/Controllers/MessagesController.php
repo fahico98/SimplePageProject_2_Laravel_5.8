@@ -46,7 +46,7 @@ class MessagesController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function store(Request $request){
-      //
+
    }
 
    /**
@@ -56,7 +56,7 @@ class MessagesController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function show($id){
-      //
+
    }
 
    /**
@@ -66,7 +66,7 @@ class MessagesController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function edit($id){
-      //
+
    }
 
    /**
@@ -77,7 +77,7 @@ class MessagesController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function update(Request $request, $id){
-      //
+
    }
 
    /**
@@ -87,7 +87,7 @@ class MessagesController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function destroy($id){
-      //
+
    }
 
    /**

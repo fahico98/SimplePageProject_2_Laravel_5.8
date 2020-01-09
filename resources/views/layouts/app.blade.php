@@ -66,7 +66,7 @@
                                        {{ __('User search') }}
                                     </a>
                                  @endisadmin
-                                 <a href="{{ route('user.profile', ['id' => Auth::user()->e_mail, 'tab' => 'Posts']) }}"
+                                 <a href="{{ route('user.profile', ['email' => Auth::user()->e_mail, 'tab' => 'posts']) }}"
                                     class="dropdown-item">
                                     {{ __('Profile') }}
                                  </a>

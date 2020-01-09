@@ -49,7 +49,10 @@ class PostController extends Controller{
       $post->likes = 0;
       $post->dislikes = 0;
       $post->save();
-      return(redirect()->route("user.profile", ["e_mail" => $request->email]));
+      return redirect()->route("user.profile", [
+         "e_mail" => $request->email,
+         "tab" => "posts"
+      ]);
    }
 
    /**
@@ -65,7 +68,10 @@ class PostController extends Controller{
          "content" => $request->updatePostContent,
          "post_permission_id" => $request->updatePermission
       ]);
-      return(redirect()->route("user.profile", ["e_mail" => $post->user->e_mail]));
+      return redirect()->route("user.profile", [
+         "e_mail" => $request->email,
+         "tab" => "posts"
+      ]);
    }
 
    /**
@@ -76,7 +82,10 @@ class PostController extends Controller{
       $post = Post::where("id", "=", $id)->first();
       $email = $post->user->e_mail;
       $post->delete();
-      return(redirect()->route("user.profile", ["e_mail" => $email]));
+      return redirect()->route("user.profile", [
+         "e_mail" => $request->email,
+         "tab" => "posts"
+      ]);
    }
 
    public function modalUpdateForm(){

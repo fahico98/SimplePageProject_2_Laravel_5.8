@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Message;
 use App\User;
 use App\Post;
 
@@ -24,12 +25,51 @@ class UserController extends Controller{
     * @param  String  $e_mail
     * @return \Illuminate\Http\Response
     */
-   public function profile($e_mail, $tab){
+   public function profile($e_mail, $tab = ""){
       $user = User::where("e_mail", "=", $e_mail)->first();
-      if($tab === "Posts"){
+      if($tab === "posts"){
+         $posts = Post::where("user_id", "=", $user->id)->orderBy("created_at", "desc")->get();
+         return view("user.profile_tabs.posts")->with([
+            "posts" => $posts,
+            "user" => $user,
+            "tab" => $tab
+         ]);
+      }else if($tab === "followers"){
+         return view("user.profile_tabs.following_followers")->with([
+            "users" => $user->followers,
+            "user" => $user,
+            "tab" => $tab
+         ]);
+      }else if($tab === "following"){
+         return view("user.profile_tabs.following_followers")->with([
+            "users" => $user->following,
+            "user" => $user,
+            "tab" => $tab
+         ]);
+      }else if($tab === "messages"){
+         $messages = Message::where("recipient_id", "=", $user->id)->with("sender")->get();
+         return view("user.profile_tabs.messages")->with([
+            "messages" => $messages,
+            "user" => $user,
+            "tab" => $tab
+         ]);
+      }/*else if($tab === "settings"){
 
+         return view("user.profile_tabs.settings")->with([
+            "user" => $user,
+            "tab" => $tab
+         ]);
+      }*/
+      else{
+         return redirect()->route("user.profile", [
+            "e_mail" => $user->e_mail,
+            "tab" => "posts"
+         ]);
       }
-      return(view("user.profile")->with(["user" => $user]));
+   }
+
+   public function profileRedirection($email){
+
    }
 
    /**
@@ -49,7 +89,10 @@ class UserController extends Controller{
             $user->update(["profile_picture" => $path]);
          }
       }
-      return(redirect()->route("user.profile", ["e_mail" => $user->e_mail]));
+      return redirect()->route("user.profile", [
+         "e_mail" => $user->e_mail,
+         "tab" => $request->tab
+      ]);
    }
 
    /**
@@ -63,6 +106,6 @@ class UserController extends Controller{
          "occupation" => $request->occupation,
          "biography" => $request->biography
       ]);
-      return(redirect()->route("user.profile", ["e_mail" => $user->e_mail]));
+      return edirect()->route("user.profile", ["e_mail" => $user->e_mail]);
    }
 }
