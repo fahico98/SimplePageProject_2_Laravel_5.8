@@ -28,7 +28,7 @@ Route::get("admin/users/crud_content", "AdministratorController@crudContent");
 Route::resource('admin/users', 'AdministratorController');
 
 Route::get("user/message/send", "MessagesController@send")->name("user.messages.send");
-Route::resource("user/messages", "MessagesController");
+Route::get("user/message/delete", "MessagesController@destroy")->name("user.messages.delete");
 
 Route::get("user/post/modal_delete_form", "PostController@modalDeleteForm");
 Route::get("user/post/modal_update_form", "PostController@modalUpdateForm");

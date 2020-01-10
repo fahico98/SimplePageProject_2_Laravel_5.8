@@ -47,7 +47,11 @@ class UserController extends Controller{
             "tab" => $tab
          ]);
       }else if($tab === "messages"){
-         $messages = Message::where("recipient_id", "=", $user->id)->with("sender")->get();
+         $messages = Message::where("recipient_id", "=", $user->id)
+            ->orWhere("sender_id", "=", $user->id)
+            ->orderBy('id', 'desc')
+            ->with(["sender", "recipient"])
+            ->get();
          return view("user.profile_tabs.messages")->with([
             "messages" => $messages,
             "user" => $user,

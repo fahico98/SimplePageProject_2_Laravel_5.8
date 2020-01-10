@@ -20,17 +20,6 @@ class MessagesController extends Controller{
    }
 
    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-   public function index(){
-      $userId = User::where("e_mail", "=", session("email"))->first()->id;
-      $messages = Message::where("recipient_id", "=", $userId)->with("sender")->get();
-      return view("user.profile_tabs.messages")->with(["messages" => $messages]);
-   }
-
-   /**
     * Show the form for creating a new resource.
     *
     * @return \Illuminate\Http\Response
@@ -86,8 +75,8 @@ class MessagesController extends Controller{
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id){
-
+   public function destroy(){
+      Message::where("id", "=", Input::get("id"))->first()->delete();
    }
 
    /**
@@ -96,6 +85,16 @@ class MessagesController extends Controller{
     * @param  \Illuminate\Http\Request  $request
     */
    public function send(Request $request){
-
+      $recipiet = User::where("e_mail", "=", trim($request->recipientEmail))->first();
+      $sender = User::where("e_mail", "=", $request->senderEmail)->first();
+      DB::table("messages")->insert([
+         "sender_id" => $sender->id,
+         "recipient_id" => $recipiet->id,
+         "content" => $request->messageContent
+      ]);
+      return redirect()->route("user.profile", [
+         "e_mail" => $sender->e_mail,
+         "tab" => "messages"
+      ]);
    }
 }

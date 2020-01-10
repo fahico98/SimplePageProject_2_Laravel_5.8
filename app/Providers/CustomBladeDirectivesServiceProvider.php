@@ -74,5 +74,25 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
             return false;
          }
       });
+
+      Blade::if("sended", function($messageId){
+         if(Auth::user()){
+            $userId = User::where("e_mail", "=", session("email"))->first()->id;
+            return DB::table("messages")
+               ->where("id", "=", $messageId)
+               ->where("sender_id", "=", $userId)
+               ->exists();
+         }
+      });
+
+      Blade::if("received", function($messageId){
+         if(Auth::user()){
+            $userId = User::where("e_mail", "=", session("email"))->first()->id;
+            return DB::table("messages")
+               ->where("id", "=", $messageId)
+               ->where("recipient_id", "=", $userId)
+               ->exists();
+         }
+      });
    }
 }
