@@ -8,61 +8,65 @@
       </div>
       <div class="accordion" id="accordionExample">
          @forelse($messages as $message)
-            <div class="card bg-light" id="{{ $message->id }}">
-               <div class="card-header collapsed" id="heading{{ $message->id }}" data-toggle="collapse" aria-expanded="false"
-                  data-target="#collapse{{ $message->id }}" aria-controls="collapse{{ $message->id }}" style="cursor: pointer;">
+         <!--
+            <div class="card bg-light" id="{/{ $message->id }}">
+               <div class="card-header collapsed" id="heading{/{ $message->id }}" data-toggle="collapse" aria-expanded="false"
+                  data-target="#collapse{/{ $message->id }}" aria-controls="collapse{/{ $message->id }}" style="cursor: pointer;">
                   <div class="row">
                      <div class="col-11">
                         <p class="mb-0 text-truncate">
                            <a class="btn btn-link collapsed" data-toggle="collapse" aria-expanded="false"
-                              data-target="#collapse{{ $message->id }}" aria-controls="collapse{{ $message->id }}">
-                              @sended($message->id)
-                                 To&nbsp;<strong>{{ $message->recipient->name }}&nbsp;
-                                    {{ $message->recipient->lastname }}:&nbsp;</strong>
-                              @else
-                                 From&nbsp;<strong>{{ $message->sender->name }}&nbsp;
-                                    {{ $message->sender->lastname }}:&nbsp;</strong>
-                              @endsended
-                              {{ $message->content }}
+                              data-target="#collapse{/{ $message->id }}" aria-controls="collapse{/{ $message->id }}">
+                              @/sended($message->id)
+                                 To&nbsp;<strong>{/{ $message->recipient->name }}&nbsp;
+                                    {/{ $message->recipient->lastname }}:&nbsp;</strong>
+                              @/else
+                                 From&nbsp;<strong>{/{ $message->sender->name }}&nbsp;
+                                    {/{ $message->sender->lastname }}:&nbsp;</strong>
+                              @/endsended
+                              {/{ $message->content }}
                            </a>
                         </p>
                      </div>
                      <div class="col-1 mt-2">
-                        @sended($message->id)
+                        @/sended($message->id)
                            <i class="text-primary far fa-lg fa-arrow-alt-circle-right"></i>
-                        @else
+                        @/else
                            <i class="text-primary far fa-lg fa-arrow-alt-circle-left"></i>
-                        @endsended
+                        @/endsended
                      </div>
                   </div>
                </div>
-               <div id="collapse{{ $message->id }}" class="collapse" aria-labelledby="heading{{ $message->id }}"
+               <div id="collapse{/{ $message->id }}" class="collapse" aria-labelledby="heading{/{ $message->id }}"
                   data-parent="#accordionExample">
                   <div class="card-body overflow-auto">
-                     <p class="messageActionContent" id="{{ $message->id }}">{{ $message->content }}</p>
+                     <p class="messageActionContent" id="{/{ $message->id }}">{/{ $message->content }}</p>
                      <div class="d-inline">
-                        <a href="#" class="text-primary answerMessage" id="{{ $message->id }}">
+                        <a href="#" class="text-primary answerMessage" id="{/{ $message->id }}">
                            <small>Answer</small>
                         </a>
                         &nbsp;&nbsp;
-                        <a href="#" class="text-primary resendMessage" id="{{ $message->id }}">
+                        <a href="#" class="text-primary resendMessage" id="{/{ $message->id }}">
                            <small>Resend</small>
                         </a>
                         &nbsp;&nbsp;
-                        <a href="#" class="text-danger deleteMessage" id="{{ $message->id }}">
+                        <a href="#" class="text-danger deleteMessage" id="{/{ $message->id }}">
                            <small>Delete</small>
                         </a>
                      </div>
-                     @sended($message->id)
-                        <input type="hidden" class="messageActionRecipientEmail" id="{{ $message->id }}"
-                           value="{{ $message->recipient->e_mail }}">
-                     @else
-                        <input type="hidden" class="messageActionRecipientEmail" id="{{ $message->id }}"
-                           value="{{ $message->sender->e_mail }}">
-                     @endsended
+                     @/sended($message->id)
+                        <input type="hidden" class="messageActionRecipientEmail" id="{/{ $message->id }}"
+                           value="{/{ $message->recipient->e_mail }}">
+                     @/else
+                        <input type="hidden" class="messageActionRecipientEmail" id="{/{ $message->id }}"
+                           value="{/{ $message->sender->e_mail }}">
+                     @/endsended
                   </div>
                </div>
             </div>
+         -->
+         {{ $message->receiver->name . " " . $message->receiver->lastname . ": " . $message->content }}
+         <br><br>
          @empty
             <div class="row justify-content-center">
                <h5 class="mt-5 font-weight-bold">You don't have any message yet...!</h5>
@@ -91,17 +95,16 @@
                   @csrf
                   <div class="modal-body">
                      <div class="form-group row mx-2 my-2">
-                        <input id="recipientEmail" name="recipientEmail" type="text" placeholder="Recipient email"
+                        <input id="receiverEmail" name="receiverEmail" type="text" placeholder="Receiver email"
                            class="w-100 form-control">
                      </div>
                      <div class="form-group row mx-2 my-0">
                         <textarea class="form-control" name="messageContent" id="messageContent" rows="4" cols="50"
                            style="resize: none; width: 100%;" placeholder="Content..."></textarea>
                      </div>
-                     <input type="hidden" name="senderEmail" value="{{ session("email") }}">
                   </div>
                   <div class="modal-footer">
-                     <button type="submit" id="newMessageSubmitButton" class="btn btn-primary">Send</button>
+                     <button type="submit" class="btn btn-primary">Send</button>
                      <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                   </div>
                </form>

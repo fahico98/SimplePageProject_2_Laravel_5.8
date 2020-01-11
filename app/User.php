@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Inani\Messager\Helpers\MessageAccessible;
+use Inani\Messager\Helpers\TagsCreator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail{
 
-   use Notifiable;
+   use Notifiable, MessageAccessible, TagsCreator;
 
    /**
     * The attributes that are mass assignable.
@@ -76,13 +78,5 @@ class User extends Authenticatable implements MustVerifyEmail{
 
    public function following(){
       return $this->belongsToMany(User::class, 'follower_followed', 'follower_id', 'followed_id');
-   }
-
-   public function sentMessages(){
-      return $this->hasMany(Message::class, "sender_id");
-   }
-
-   public function receivedMessages(){
-      return $this->hasMany(Message::class, "recipient_id");
    }
 }

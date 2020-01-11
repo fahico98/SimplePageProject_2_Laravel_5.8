@@ -38,8 +38,19 @@ class DefineForeignKeys extends Migration{
       });
 
       Schema::table("messages", function(Blueprint $table){
-         $table->foreign("sender_id")->references("id")->on("users")->onDelete("cascade");
-         $table->foreign("recipient_id")->references("id")->on("users")->onDelete("cascade");
+         $table->foreign("root_id")->references("id")->on("messages")->onDelete("cascade");
+         $table->foreign('from_id')->references('id')->on('users')->onDelete("cascade");
+         $table->foreign('to_id')->references('id')->on('users')->onDelete("cascade");
+      });
+
+      Schema::table("tagged_messages", function(Blueprint $table){
+         $table->foreign('message_id')->references('id')->on('messages')->onDelete("cascade");
+         $table->foreign('tag_from_id')->references('id')->on('tags')->onDelete("cascade");
+         $table->foreign('tag_to_id')->references('id')->on('tags')->onDelete("cascade");
+      });
+
+      Schema::table("tags", function(Blueprint $table){
+         $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
       });
    }
 
@@ -75,8 +86,19 @@ class DefineForeignKeys extends Migration{
       });
 
       Schema::table("messages", function(Blueprint $table){
-         $table->dropForeign("messages_sender_id_foreign");
-         $table->dropForeign("messages_recipient_id_foreign");
+         $table->dropForeign("messages_root_id_foreign");
+         $table->dropForeign("messages_from_id_foreign");
+         $table->dropForeign("messages_to_id_foreign");
+      });
+
+      Schema::table("tagged_messages", function(Blueprint $table){
+         $table->dropForeign("tagged_messages_message_id_foreign");
+         $table->dropForeign("tagged_messages_tag_from_id_foreign");
+         $table->dropForeign("tagged_messages_tag_to_id_foreign");
+      });
+
+      Schema::table("tags", function(Blueprint $table){
+         $table->dropForeign("tags_user_id_foreign");
       });
    }
 }

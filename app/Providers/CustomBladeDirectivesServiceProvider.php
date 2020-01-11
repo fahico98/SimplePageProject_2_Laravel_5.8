@@ -78,7 +78,7 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
       Blade::if("sended", function($messageId){
          if(Auth::user()){
             $userId = User::where("e_mail", "=", session("email"))->first()->id;
-            return DB::table("messages")
+            return DB::table("sended_messages")
                ->where("id", "=", $messageId)
                ->where("sender_id", "=", $userId)
                ->exists();
@@ -88,7 +88,7 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
       Blade::if("received", function($messageId){
          if(Auth::user()){
             $userId = User::where("e_mail", "=", session("email"))->first()->id;
-            return DB::table("messages")
+            return DB::table("received_messages")
                ->where("id", "=", $messageId)
                ->where("recipient_id", "=", $userId)
                ->exists();

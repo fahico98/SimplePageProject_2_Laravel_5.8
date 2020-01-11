@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Message;
 use App\User;
 
 class MessagesController extends Controller{
@@ -76,7 +75,8 @@ class MessagesController extends Controller{
     * @return \Illuminate\Http\Response
     */
    public function destroy(){
-      Message::where("id", "=", Input::get("id"))->first()->delete();
+      SendedMessage::where("id", "=", Input::get("id"))->first()->delete();
+      ReceivedMessage::where("id", "=", Input::get("id"))->first()->delete();
    }
 
    /**
@@ -85,13 +85,24 @@ class MessagesController extends Controller{
     * @param  \Illuminate\Http\Request  $request
     */
    public function send(Request $request){
+      $receiver = User::where("e_mail", "=", trim($request->receiverEmail))->first();
+      $messageData = ['content' => $request->messageContent];
+      list($message, $user) = User::createFromRequest($messageData);
+
+      $sender = User::where("e_mail", "=", session("email"))->first();
+      $sender->writes($message)->to($receiver)->send();
+
+      /*
       $recipiet = User::where("e_mail", "=", trim($request->recipientEmail))->first();
       $sender = User::where("e_mail", "=", $request->senderEmail)->first();
-      DB::table("messages")->insert([
+      $data = [
          "sender_id" => $sender->id,
          "recipient_id" => $recipiet->id,
          "content" => $request->messageContent
-      ]);
+      ];
+      DB::table("sended_messages")->insert($data);
+      DB::table("received_message")->insert($data);
+      */
       return redirect()->route("user.profile", [
          "e_mail" => $sender->e_mail,
          "tab" => "messages"

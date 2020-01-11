@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -14,10 +13,14 @@ class CreateMessagesTable extends Migration{
    public function up(){
       Schema::create('messages', function (Blueprint $table) {
          $table->bigIncrements('id');
+         $table->bigInteger('from_id')->unsigned();
+         $table->bigInteger('to_id')->unsigned()->nullable();
+         $table->bigInteger('root_id')->unsigned()->nullable();
+         // $table->text('title');
          $table->text('content');
-         $table->boolean('readed')->default(0)->change();
-         $table->bigInteger("sender_id")->unsigned();
-         $table->bigInteger("recipient_id")->unsigned();
+         $table->integer('state')->default(0);
+         $table->integer('archived_at_from')->default(0);
+         $table->integer('archived_at_to')->default(0);
          $table->timestamps();
       });
    }
@@ -28,6 +31,6 @@ class CreateMessagesTable extends Migration{
     * @return void
     */
    public function down(){
-      Schema::dropIfExists('messages');
+      Schema::drop('messages');
    }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "028e4b66cb2d2dc17f5d1af7f6ecb5df",
+    "content-hash": "0439254bfa85c07f560af45afd8f675a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -568,6 +568,46 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "inani/messager",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akiyamaSM/messager.git",
+                "reference": "b1c259da89923629c66d77001742cf837c70f7da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akiyamaSM/messager/zipball/b1c259da89923629c66d77001742cf837c70f7da",
+                "reference": "b1c259da89923629c66d77001742cf837c70f7da",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Inani\\Messager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Inani El Houssain",
+                    "email": "inanielhoussain@gmail.com"
+                }
+            ],
+            "description": "A simple package to handle messages",
+            "time": "2017-03-06T10:26:04+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use App\Message;
+use App\ReceivedMessage;
 use App\User;
 use App\Post;
 
@@ -47,11 +47,18 @@ class UserController extends Controller{
             "tab" => $tab
          ]);
       }else if($tab === "messages"){
-         $messages = Message::where("recipient_id", "=", $user->id)
-            ->orWhere("sender_id", "=", $user->id)
-            ->orderBy('id', 'desc')
-            ->with(["sender", "recipient"])
+         /*
+         $messages = ReceivedMessage::where("received_messages.recipient_id", "=", $user->id)
+            ->join("sended_messages", "sended_messages.sender_id", "=", $user->id)
+            ->with([
+               "received_messages.sender",
+               "received_messages.recipient",
+               "sended_messages.sender",
+               "sender_messages.recipient"
+            ])->orderBy('id', 'desc')
             ->get();
+         */
+         $messages = $user->sentAndReceived();
          return view("user.profile_tabs.messages")->with([
             "messages" => $messages,
             "user" => $user,
