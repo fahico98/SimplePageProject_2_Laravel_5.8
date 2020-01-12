@@ -168,7 +168,8 @@
                      <div class="form-group row mx-2 my-0">
                         <textarea name="biography" id="biography" rows="3" cols="50" style="resize: none; width: 100%;"
                         class="form-control" placeholder="Your biography..."></textarea>
-                        <input name="e_mail" type="hidden" value="{{ $user->e_mail }}"> <!-- Hidden input -->
+                        <input name="e_mail" type="hidden" value="{{ $user->e_mail }}">      <!-- Hidden input -->
+                        <input name="tab" type="hidden" value="{{ $tab }}">                  <!-- Hidden input -->
                      </div>
                   </div>
                   <div class="modal-footer">

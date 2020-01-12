@@ -47,17 +47,6 @@ class UserController extends Controller{
             "tab" => $tab
          ]);
       }else if($tab === "messages"){
-         /*
-         $messages = ReceivedMessage::where("received_messages.recipient_id", "=", $user->id)
-            ->join("sended_messages", "sended_messages.sender_id", "=", $user->id)
-            ->with([
-               "received_messages.sender",
-               "received_messages.recipient",
-               "sended_messages.sender",
-               "sender_messages.recipient"
-            ])->orderBy('id', 'desc')
-            ->get();
-         */
          $messages = $user->sentAndReceived();
          return view("user.profile_tabs.messages")->with([
             "messages" => $messages,
@@ -117,6 +106,9 @@ class UserController extends Controller{
          "occupation" => $request->occupation,
          "biography" => $request->biography
       ]);
-      return edirect()->route("user.profile", ["e_mail" => $user->e_mail]);
+      return redirect()->route("user.profile", [
+         "e_mail" => $user->e_mail,
+         "tab" => $request->tab
+      ]);
    }
 }

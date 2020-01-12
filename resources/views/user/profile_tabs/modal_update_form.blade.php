@@ -64,6 +64,7 @@
                   </div>
                </div>
             </div>
+            <input name="email" type="hidden" value="{{ session("email") }}"> <!-- Hidden input -->
             <div class="modal-footer">
                <button type="submit" id="updatePostSubmitButton" class="btn btn-primary">Done</button>
                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>

@@ -5,7 +5,7 @@ $(document).ready(function(){
       event.preventDefault();
       $("#newMessageModalLabel").text("New message");
       $("#messageContent").val("");
-      $("#recipientEmail").val("");
+      $("#receiverEmail").val("");
       $("#triggerNewMessageModalButton").trigger("click");
    });
 
@@ -14,7 +14,7 @@ $(document).ready(function(){
       $("#newMessageModalLabel").text("Answer message");
       var id = $(this).attr("id");
       $("#messageContent").val("");
-      $("#recipientEmail").val($("#" + id + ".messageActionRecipientEmail").val());
+      $("#receiverEmail").val($("#" + id + ".messageActionRecipientEmail").val());
       $("#triggerNewMessageModalButton").trigger("click");
    });
 
@@ -22,7 +22,7 @@ $(document).ready(function(){
       event.preventDefault();
       $("#newMessageModalLabel").text("Resend message");
       var id = $(this).attr("id");
-      $("#recipientEmail").val("");
+      $("#receiverEmail").val("");
       $("#messageContent").val($("#" + id + ".messageActionContent").text());
       $("#triggerNewMessageModalButton").trigger("click");
    });
@@ -33,7 +33,7 @@ $(document).ready(function(){
       $("#triggerDeleteMessageModalButton").trigger("click");
    });
 
-   $(document).on("click", "#deleteMessageAction", function(){
+   $(document).on("click", "#deleteMessageSubmitButton", function(){
       var messageId = $("#messageToDeleteId").val();
       deleteMessage(messageId);
    });
@@ -50,7 +50,8 @@ function deleteMessage(id){
       type: "GET",
       dataType: "html",
       processData: false,
-      success: function(){
+      success: function(response){
+         console.log(">>>" + response + "<<<");
          $("#" + id + ".card").remove();
       },
       async: false

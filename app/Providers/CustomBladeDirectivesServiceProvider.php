@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Inani\Messager\Message;
 use App\User;
 
 class CustomBladeDirectivesServiceProvider extends ServiceProvider{
@@ -78,9 +79,10 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
       Blade::if("sended", function($messageId){
          if(Auth::user()){
             $userId = User::where("e_mail", "=", session("email"))->first()->id;
-            return DB::table("sended_messages")
+            return DB::table("messages")
+               ->where("from_id", "=", $userId)
                ->where("id", "=", $messageId)
-               ->where("sender_id", "=", $userId)
+               ->where("archived_at_from", "=", 1)
                ->exists();
          }
       });
@@ -88,9 +90,10 @@ class CustomBladeDirectivesServiceProvider extends ServiceProvider{
       Blade::if("received", function($messageId){
          if(Auth::user()){
             $userId = User::where("e_mail", "=", session("email"))->first()->id;
-            return DB::table("received_messages")
+            return DB::table("messages")
+               ->where("to_id", "=", $userId)
                ->where("id", "=", $messageId)
-               ->where("recipient_id", "=", $userId)
+               ->where("archived_at_to", "=", 1)
                ->exists();
          }
       });

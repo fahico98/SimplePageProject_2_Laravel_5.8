@@ -83,7 +83,7 @@ class PostController extends Controller{
       $email = $post->user->e_mail;
       $post->delete();
       return redirect()->route("user.profile", [
-         "e_mail" => $request->email,
+         "e_mail" => $email,
          "tab" => "posts"
       ]);
    }

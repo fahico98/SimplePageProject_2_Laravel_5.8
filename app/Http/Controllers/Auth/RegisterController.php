@@ -87,6 +87,7 @@ class RegisterController extends Controller{
     * @return \simplePageProject_2\User
     */
    protected function create(array $data){
+      session(['email' => $data["e_mail"]]);
       return User::create([
          'name' => $data['name'],
          "lastname" => $data["lastname"],

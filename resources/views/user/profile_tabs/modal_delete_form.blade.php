@@ -21,7 +21,7 @@
             Are you sure to want to delete this post ?
          </div>
          <div class="modal-footer">
-            <form method="GET" action="{{ route('user.post.destroy', $id) }}">
+            <form method="GET" action="{{ route('user.post.destroy', ['id' => $id]) }}">
                @csrf
                @method('DELETE')
                <button type="submit" class="btn btn-primary">Delete</button>

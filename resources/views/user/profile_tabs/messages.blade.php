@@ -8,65 +8,86 @@
       </div>
       <div class="accordion" id="accordionExample">
          @forelse($messages as $message)
-         <!--
-            <div class="card bg-light" id="{/{ $message->id }}">
-               <div class="card-header collapsed" id="heading{/{ $message->id }}" data-toggle="collapse" aria-expanded="false"
-                  data-target="#collapse{/{ $message->id }}" aria-controls="collapse{/{ $message->id }}" style="cursor: pointer;">
-                  <div class="row">
-                     <div class="col-11">
-                        <p class="mb-0 text-truncate">
-                           <a class="btn btn-link collapsed" data-toggle="collapse" aria-expanded="false"
-                              data-target="#collapse{/{ $message->id }}" aria-controls="collapse{/{ $message->id }}">
-                              @/sended($message->id)
-                                 To&nbsp;<strong>{/{ $message->recipient->name }}&nbsp;
-                                    {/{ $message->recipient->lastname }}:&nbsp;</strong>
-                              @/else
-                                 From&nbsp;<strong>{/{ $message->sender->name }}&nbsp;
-                                    {/{ $message->sender->lastname }}:&nbsp;</strong>
-                              @/endsended
-                              {/{ $message->content }}
-                           </a>
-                        </p>
-                     </div>
-                     <div class="col-1 mt-2">
-                        @/sended($message->id)
-                           <i class="text-primary far fa-lg fa-arrow-alt-circle-right"></i>
-                        @/else
+            @received($message->id)
+               <div class="card bg-light" id="{{ $message->id }}">
+                  <div class="card-header collapsed" id="heading{{ $message->id }}" data-toggle="collapse" aria-expanded="false"
+                     data-target="#collapse{{ $message->id }}" aria-controls="collapse{{ $message->id }}" style="cursor: pointer;">
+                     <div class="row">
+                        <div class="col-11">
+                           <p class="mb-0 text-truncate">
+                              <a class="btn btn-link collapsed" data-toggle="collapse" aria-expanded="false"
+                                 data-target="#collapse{{ $message->id }}" aria-controls="collapse{{ $message->id }}">
+                                 From&nbsp;<strong>{{ $message->sender->name }}&nbsp;{{ $message->sender->lastname }}:&nbsp;</strong>
+                                 {{ $message->content }}
+                              </a>
+                           </p>
+                        </div>
+                        <div class="col-1 mt-2">
                            <i class="text-primary far fa-lg fa-arrow-alt-circle-left"></i>
-                        @/endsended
+                        </div>
+                     </div>
+                  </div>
+                  <div id="collapse{{ $message->id }}" class="collapse" aria-labelledby="heading{{ $message->id }}"
+                     data-parent="#accordionExample">
+                     <div class="card-body overflow-auto">
+                        <p class="messageActionContent" id="{{ $message->id }}">{{ $message->content }}</p>
+                        <div class="d-inline">
+                           <a href="#" class="text-primary answerMessage" id="{{ $message->id }}">
+                              <small>Answer</small>
+                           </a>
+                           &nbsp;&nbsp;
+                           <a href="#" class="text-primary resendMessage" id="{{ $message->id }}">
+                              <small>Resend</small>
+                           </a>
+                           &nbsp;&nbsp;
+                           <a href="#" class="text-danger deleteMessage" id="{{ $message->id }}">
+                              <small>Delete</small>
+                           </a>
+                        </div>
+                        <input type="hidden" class="messageActionRecipientEmail" id="{{ $message->id }}"
+                           value="{{ $message->receiver->e_mail }}">
                      </div>
                   </div>
                </div>
-               <div id="collapse{/{ $message->id }}" class="collapse" aria-labelledby="heading{/{ $message->id }}"
-                  data-parent="#accordionExample">
-                  <div class="card-body overflow-auto">
-                     <p class="messageActionContent" id="{/{ $message->id }}">{/{ $message->content }}</p>
-                     <div class="d-inline">
-                        <a href="#" class="text-primary answerMessage" id="{/{ $message->id }}">
-                           <small>Answer</small>
-                        </a>
-                        &nbsp;&nbsp;
-                        <a href="#" class="text-primary resendMessage" id="{/{ $message->id }}">
-                           <small>Resend</small>
-                        </a>
-                        &nbsp;&nbsp;
-                        <a href="#" class="text-danger deleteMessage" id="{/{ $message->id }}">
-                           <small>Delete</small>
-                        </a>
+            @endreceived
+            @sended($message->id)
+               <div class="card bg-light" id="{{ $message->id }}">
+                  <div class="card-header collapsed" id="heading{{ $message->id }}" data-toggle="collapse" aria-expanded="false"
+                     data-target="#collapse{{ $message->id }}" aria-controls="collapse{{ $message->id }}" style="cursor: pointer;">
+                     <div class="row">
+                        <div class="col-11">
+                           <p class="mb-0 text-truncate">
+                              <a class="btn btn-link collapsed" data-toggle="collapse" aria-expanded="false"
+                                 data-target="#collapse{{ $message->id }}" aria-controls="collapse{{ $message->id }}">
+                                 To&nbsp;<strong>{{ $message->receiver->name }}&nbsp;{{ $message->receiver->lastname }}:&nbsp;</strong>
+                                 {{ $message->content }}
+                              </a>
+                           </p>
+                        </div>
+                        <div class="col-1 mt-2">
+                           <i class="text-primary far fa-lg fa-arrow-alt-circle-right"></i>
+                        </div>
                      </div>
-                     @/sended($message->id)
-                        <input type="hidden" class="messageActionRecipientEmail" id="{/{ $message->id }}"
-                           value="{/{ $message->recipient->e_mail }}">
-                     @/else
-                        <input type="hidden" class="messageActionRecipientEmail" id="{/{ $message->id }}"
-                           value="{/{ $message->sender->e_mail }}">
-                     @/endsended
+                  </div>
+                  <div id="collapse{{ $message->id }}" class="collapse" aria-labelledby="heading{{ $message->id }}"
+                     data-parent="#accordionExample">
+                     <div class="card-body overflow-auto">
+                        <p class="messageActionContent" id="{{ $message->id }}">{{ $message->content }}</p>
+                        <div class="d-inline">
+                           <a href="#" class="text-primary resendMessage" id="{{ $message->id }}">
+                              <small>Resend</small>
+                           </a>
+                           &nbsp;&nbsp;
+                           <a href="#" class="text-danger deleteMessage" id="{{ $message->id }}">
+                              <small>Delete</small>
+                           </a>
+                        </div>
+                        <input type="hidden" class="messageActionRecipientEmail" id="{{ $message->id }}"
+                           value="{{ $message->receiver->e_mail }}">
+                     </div>
                   </div>
                </div>
-            </div>
-         -->
-         {{ $message->receiver->name . " " . $message->receiver->lastname . ": " . $message->content }}
-         <br><br>
+            @endsended
          @empty
             <div class="row justify-content-center">
                <h5 class="mt-5 font-weight-bold">You don't have any message yet...!</h5>
@@ -134,7 +155,9 @@
                </div>
                <input type="hidden" id="messageToDeleteId">
                <div class="modal-footer">
-                  <button type="button" id="deleteMessageAction" class="btn btn-primary" data-dismiss="modal">Delete</button>
+                  <button type="button" id="deleteMessageSubmitButton" class="btn btn-primary" data-dismiss="modal">
+                     Delete
+                  </button>
                   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                </div>
             </div>
