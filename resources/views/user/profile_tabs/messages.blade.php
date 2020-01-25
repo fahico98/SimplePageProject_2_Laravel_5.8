@@ -44,8 +44,7 @@
                               <small>Delete</small>
                            </a>
                         </div>
-                        <input type="hidden" class="messageActionRecipientEmail" id="{{ $message->id }}"
-                           value="{{ $message->receiver->e_mail }}">
+                        <input type="hidden" class="talkerEmail" id="{{ $message->id }}" value="{{ $message->sender->e_mail }}">
                      </div>
                   </div>
                </div>
@@ -82,8 +81,7 @@
                               <small>Delete</small>
                            </a>
                         </div>
-                        <input type="hidden" class="messageActionRecipientEmail" id="{{ $message->id }}"
-                           value="{{ $message->receiver->e_mail }}">
+                        <input type="hidden" class="talkerEmail" id="{{ $message->id }}" value="{{ $message->receiver->e_mail }}">
                      </div>
                   </div>
                </div>

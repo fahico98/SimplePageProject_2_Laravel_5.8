@@ -14,7 +14,7 @@ $(document).ready(function(){
       $("#newMessageModalLabel").text("Answer message");
       var id = $(this).attr("id");
       $("#messageContent").val("");
-      $("#receiverEmail").val($("#" + id + ".messageActionRecipientEmail").val());
+      $("#receiverEmail").val($("#" + id + ".talkerEmail").val());
       $("#triggerNewMessageModalButton").trigger("click");
    });
 
@@ -51,7 +51,6 @@ function deleteMessage(id){
       dataType: "html",
       processData: false,
       success: function(response){
-         console.log(">>>" + response + "<<<");
          $("#" + id + ".card").remove();
       },
       async: false
