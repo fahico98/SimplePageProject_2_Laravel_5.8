@@ -28,23 +28,7 @@
                </div>
             </div>
          </div>
-         <div id="wall" name="wall" class="col-md-9">
-
-            <!--
-            <div class="card">
-               <div class="card-header">User Panel</div>
-               <div class="card-body">
-                  @/if (session('status'))
-                     <div class="alert alert-success" role="alert">
-                        {/{ session('status') }}
-                     </div>
-                  @/endif
-                  You are logged in {/{ $user->name }}...!
-               </div>
-            </div>
-            -->
-
-         </div>
+         <div id="wall" name="wall" class="col-md-9"></div>
       </div>
    </div>
    <script src="{{ asset('js/home.js') }}" defer></script>

@@ -28,20 +28,21 @@ class HomeController extends Controller{
    public function index(){
       if(Auth::check()){
          $user = Auth::user();
-         $following = $user->following->shuffle();
-         $length = count($following);
-         $recommended = [];
-         if($length > 0){
-            $end = ($length >= 3) ? 3 : $length;
-            for($i = 0; $i < $end; $i++){
-               $buffer = $following[$i]->following->shuffle()->first();
-               if($buffer != null){
-                  $recommended[$i] = $buffer;
-               }
-            }
-         }
+         $recommendedIds = DB::table("follower_followed")
+            ->whereIn("follower_id", $user->following->pluck('id'))
+            ->pluck("followed_id");
+         $recommended = User::whereIn("id", $recommendedIds)
+            ->whereNotIn("id", $user->following->pluck("id"))
+            ->where("id", "<>", $user->id)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
          if(count($recommended) == 0){
-            $recommended = User::inRandomOrder()->limit(3)->get();
+            $recommended = User::whereNotIn("id", $user->following->pluck("id"))
+               ->where("id", "<>", $user->id)
+               ->inRandomOrder()
+               ->limit(3)
+               ->get();
          }
          return view("home")->with([
             "user" => $user,
@@ -53,11 +54,15 @@ class HomeController extends Controller{
    public function loadPosts(){
       if(Auth::check()){
          $postsPerLoad = 10;
+         $user = Auth::user();
          $step = Input::get("step");
-         return Post::whereIn("user_id", Auth::user()->following->pluck('id'))
+         $posts = Post::whereIn("user_id", $user->following->pluck('id'))
+            ->orWhere("user_id", "=", $user->id)
+            ->orderBy("created_at", "desc")
             ->offset($postsPerLoad * ($step - 1))
             ->limit($postsPerLoad)
             ->get();
+         return view("user.profile_tabs.post_card")->with(["posts" => $posts]);
       }
    }
 
