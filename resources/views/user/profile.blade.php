@@ -31,8 +31,8 @@
                      </form>
                   @else
                      <form method="GET" action="{{ route('user.follow', [
-                        'followerEmail' => session("email"),
-                        'followedEmail' => $user->e_mail
+                           'followerEmail' => session("email"),
+                           'followedEmail' => $user->e_mail
                         ]) }}">
                         <button type="submit" class="btn btn-primary btn-sm w-100">Follow</button>
                      </form>

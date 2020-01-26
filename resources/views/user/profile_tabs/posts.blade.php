@@ -3,7 +3,7 @@
 
 @section("profileContent")
    <div class="mt-3" id="profileContent">
-      @insession($user->e_mail)
+      @auth
          <div class="mb-3">
             <a href="#" id="newPostLink"><i class="far fa-plus-square"></i>&nbsp;New post...</a>
          </div>
@@ -65,7 +65,7 @@
 
          <div id="modalUpdatePostDiv"></div>
          <div id="modalDeletePostDiv"></div>
-      @endinsession
+      @endauth
 
       @forelse($posts as $post)
          <div class="card bg-light mb-2">

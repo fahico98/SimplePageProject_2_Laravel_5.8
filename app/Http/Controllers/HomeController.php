@@ -26,6 +26,10 @@ class HomeController extends Controller{
     * @return \Illuminate\Contracts\Support\Renderable
     */
    public function index(){
+      return view("home")->with(["tab" => "home"]);
+   }
+
+   public function recommended(){
       if(Auth::check()){
          $user = Auth::user();
          $recommendedIds = DB::table("follower_followed")
@@ -44,10 +48,7 @@ class HomeController extends Controller{
                ->limit(3)
                ->get();
          }
-         return view("home")->with([
-            "user" => $user,
-            "recommended" => $recommended
-         ]);
+         return view("user.profile_tabs.recommended_card")->with(["recommended" => $recommended]);
       }
    }
 

@@ -1,5 +1,4 @@
 
-
 <!-- Button trigger delete post modal window -->
 <button id="triggerDeletePostModalButton" type="button" class="btn btn-primary" data-toggle="modal"
    data-target="#deletePostModal" hidden>
@@ -21,7 +20,10 @@
             Are you sure to want to delete this post ?
          </div>
          <div class="modal-footer">
-            <form method="GET" action="{{ route('user.post.destroy', ['id' => $id]) }}">
+            <form method="GET" action="{{ route('user.post.destroy', [
+               'id' => $id,
+               'tab' => $tab
+               ]) }}">
                @csrf
                @method('DELETE')
                <button type="submit" class="btn btn-primary">Delete</button>

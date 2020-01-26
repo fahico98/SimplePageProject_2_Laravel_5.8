@@ -60,7 +60,9 @@ class UserController extends Controller{
             "tab" => $tab
          ]);
       }*/
-      else{
+      else if($tab === "home"){
+         return redirect()->route("home");
+      }else{
          return redirect()->route("user.profile", [
             "e_mail" => $user->e_mail,
             "tab" => "posts"

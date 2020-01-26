@@ -17,6 +17,7 @@ Route::get("/", function(){
 
 Route::get('home', 'HomeController@index')->name('home');
 Route::get("load_posts", "HomeController@loadPosts");
+Route::get("recommended", "HomeController@recommended");
 
 Route::get("admin/users/seller_register", "Auth\RegisterController@showSellerRegistrationForm")
    ->name("users.seller_register_form");
