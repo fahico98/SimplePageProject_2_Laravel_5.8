@@ -139,7 +139,7 @@ function modalUpdateForm(id){
       }
    });
    $.ajax({
-      url: "/user/post/modal_update_form?id=" + id,
+      url: "/user/post/modal_update_form?id=" + id + "&tab=posts",
       type: "GET",
       dataType: "html",
       processData: false,
@@ -157,7 +157,7 @@ function modalDeleteForm(id){
       }
    });
    $.ajax({
-      url: "/user/post/modal_delete_form?id=" + id,
+      url: "/user/post/modal_delete_form?id=" + id + "&tab=posts",
       type: "GET",
       dataType: "html",
       processData: false,

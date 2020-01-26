@@ -1,5 +1,4 @@
 
-
 <!-- Button trigger update post modal window -->
 <button id="triggerUpdatePostModalButton" type="button" class="btn btn-primary" data-toggle="modal"
    data-target="#updatePostModal" hidden>
@@ -40,7 +39,6 @@
                <div class="form-group row mx-2 my-0">
                   <textarea class="form-control" name="updatePostContent" id="updatePostContent" rows="4" cols="50"
                      style="resize: none; width: 100%;" placeholder="Content...">{{ $post->content }}</textarea>
-                  <input name="id" type="hidden" value="{{ $post->id }}"> <!-- Hidden input -->
                </div>
                <div class="form-group row mx-2 mt-3 mb-0">
                   <div class="btn-group my-0">
@@ -59,12 +57,13 @@
                         <a class="dropdown-item updateDropdownItem" href="#">Followers</a>
                         <a class="dropdown-item updateDropdownItem" href="#">Only me</a>
                      </div>
-                     <input name="updatePermission" id="updatePermission" type="hidden"
-                        value="{{ $post->post_permission_id }}"> <!-- Hidden input -->
                   </div>
                </div>
             </div>
-            <input name="email" type="hidden" value="{{ session("email") }}"> <!-- Hidden input -->
+            <input type="hidden" name="id" value="{{ $post->id }}">                    <!-- Hidden input -->
+            <input type="hidden" name="tab" value="{{ $tab }}">                        <!-- Hidden input -->
+            <input type="hidden" name="updatePermission" id="updatePermission"
+               value="{{ $post->post_permission_id }}">                                <!-- Hidden input -->
             <div class="modal-footer">
                <button type="submit" id="updatePostSubmitButton" class="btn btn-primary">Done</button>
                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>

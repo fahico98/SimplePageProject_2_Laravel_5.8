@@ -20,12 +20,11 @@
             Are you sure to want to delete this post ?
          </div>
          <div class="modal-footer">
-            <form method="GET" action="{{ route('user.post.destroy', [
-               'id' => $id,
-               'tab' => $tab
-               ]) }}">
+            <form method="GET" action="{{ route('user.post.destroy') }}">
                @csrf
                @method('DELETE')
+               <input type="hidden" name="id" value="{{ $id }}"> <!-- Hidden input -->
+               <input type="hidden" name="tab" value="{{ $tab }}"> <!-- Hidden input -->
                <button type="submit" class="btn btn-primary">Delete</button>
                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
             </form>

@@ -41,7 +41,7 @@ Route::get("user/post/like", "PostController@like");
 Route::get("user/post/dislike", "PostController@dislike");
 Route::get("user/post/create", "PostController@create")->name("user.post.create");
 Route::get("user/post/update", "PostController@update")->name("user.post.update");
-Route::get("user/post/destroy/{id}", "PostController@destroy")->name("user.post.destroy");
+Route::get("user/post/destroy", "PostController@destroy")->name("user.post.destroy");
 
 Route::get("user/unfollow/{followerEmail}/{followedEmail}/{tab?}", "FollowController@unfollow")
    ->name("user.unfollow");

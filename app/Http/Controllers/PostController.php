@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\User;
@@ -40,8 +41,8 @@ class PostController extends Controller{
     * @param  \Illuminate\Http\Request
     */
    public function create(Request $request){
+      $userId = Auth::user()->id;
       $post = new Post;
-      $userId = User::select("id")->where("e_mail", "=", $request->email)->first()->id;
       $post->user_id = $userId;
       $post->post_permission_id = $request->permission;
       $post->title = $request->postTitle;
@@ -49,10 +50,12 @@ class PostController extends Controller{
       $post->likes = 0;
       $post->dislikes = 0;
       $post->save();
-      return redirect()->route("user.profile", [
-         "e_mail" => $request->email,
-         "tab" => "posts"
-      ]);
+      return ($request->tab == "home") ?
+         redirect()->route("home") :
+         redirect()->route("user.profile", [
+            "e_mail" => Auth::user()->e_mail,
+            "tab" => "posts"
+         ]);
    }
 
    /**
@@ -61,42 +64,52 @@ class PostController extends Controller{
     * @param  \Illuminate\Http\Request
     */
    public function update(Request $request){
-      $postId = Input::get("id");
-      $post = Post::where("id", "=", $postId)->first();
+      $post = Post::where("id", "=", $request->id)->first();
       $post->update([
          "title" => $request->updatePostTitle,
          "content" => $request->updatePostContent,
          "post_permission_id" => $request->updatePermission
       ]);
-      return redirect()->route("user.profile", [
-         "e_mail" => $request->email,
-         "tab" => "posts"
-      ]);
+      return ($request->tab == "home") ?
+         redirect()->route("home") :
+         redirect()->route("user.profile", [
+            "e_mail" => Auth::user()->e_mail,
+            "tab" => "posts"
+         ]);
    }
 
    /**
     * Delete a post data from database.
     *
     */
-   public function destroy($id){
-      $post = Post::where("id", "=", $id)->first();
-      $email = $post->user->e_mail;
+   public function destroy(Request $request){
+      $post = Post::where("id", "=", $request->id)->first();
       $post->delete();
-      return redirect()->route("user.profile", [
-         "e_mail" => $email,
-         "tab" => "posts"
-      ]);
+      return ($request->tab == "home") ?
+         redirect()->route("home") :
+         redirect()->route("user.profile", [
+            "e_mail" => Auth::user()->e_mail,
+            "tab" => "posts"
+         ]);
    }
 
    public function modalUpdateForm(){
       $id = Input::get("id");
+      $tab = Input::get("tab");
       $post = Post::where("id", "=", $id)->first();
-      return view("user.profile_tabs.modal_update_form")->with(["post" => $post]);
+      return view("user.profile_tabs.modal_update_form")->with([
+         "post" => $post,
+         "tab" => $tab
+      ]);
    }
 
    public function modalDeleteForm(){
       $id = Input::get("id");
-      return view("user.profile_tabs.modal_delete_form")->with(["id" => $id]);
+      $tab = Input::get("tab");
+      return view("user.profile_tabs.modal_delete_form")->with([
+         "id" => $id,
+         "tab" => $tab
+      ]);
    }
 
    public function like(){

@@ -37,7 +37,6 @@
                         <div class="form-group row mx-2 my-0">
                            <textarea class="form-control" name="postContent" id="postContent" rows="4" cols="50"
                               style="resize: none; width: 100%;" placeholder="Content..."></textarea>
-                           <input name="email" type="hidden" value="{{ $user->e_mail }}"> <!-- Hidden input -->
                         </div>
                         <div class="form-group row mx-2 mt-3 mb-0">
                            <div class="btn-group my-0">
@@ -50,10 +49,11 @@
                                  <a class="dropdown-item dropdownItem" href="#">Followers</a>
                                  <a class="dropdown-item dropdownItem" href="#">Only me</a>
                               </div>
-                              <input name="permission" id="permission" type="hidden"> <!-- Hidden input -->
                            </div>
                         </div>
                      </div>
+                     <input type="hidden" name="permission" id="permission">     <!-- Hidden input -->
+                     <input type="hidden" name="tab"  value="posts">             <!-- Hidden input -->
                      <div class="modal-footer">
                         <button type="submit" id="newPostSubmitButton" class="btn btn-primary">Post</button>
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
