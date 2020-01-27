@@ -181,7 +181,8 @@
          </div>
       </div>
    @endif
+   <script>var tab = "posts";</script>
    <script src="{{ asset('js/user/profile.js') }}" defer></script>
-   <script src="{{ asset('js/user/postsTab.js') }}" defer></script>
    <script src="{{ asset('js/user/messagesTab.js') }}" defer></script>
+   <script src="{{ asset('js/user/postsTab.js') }}" defer></script>
 @endsection

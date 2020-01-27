@@ -20,19 +20,29 @@ class PostController extends Controller{
       $this->middleware("auth")->except(["loadPosts"]);
    }
 
-   /**
-    * Load user posts from database.
-    *
-    * @param String $e_mial
-    */
-   public function index(){
-      $email = Input::get("email");
-      $id = User::select("id")->where("e_mail", "=", $email)->first()->id;
-      $posts = Post::where("user_id", "=", $id)->orderBy("created_at", "desc")->get();
-      return view("user.profile_tabs.posts")->with([
-         "posts" => $posts,
-         "email" => $email
-      ]);
+   public function loadPosts(){
+      if(Auth::check()){
+         $postsPerLoad = 10;
+         $step = Input::get("step");
+         $tab = Input::get("tab");
+         $user = Auth::user();
+         if($tab == "home"){
+            $posts = Post::whereIn("user_id", $user->following->pluck('id'))
+               ->orWhere("user_id", "=", $user->id)
+               ->orderBy("created_at", "desc")
+               ->offset($postsPerLoad * ($step - 1))
+               ->limit($postsPerLoad)
+               ->get();
+            return view("user.profile_tabs.home_post_card")->with(["posts" => $posts]);
+         }else if($tab == "posts"){
+            $posts = Post::where("user_id", "=", $user->id)
+               ->orderBy("created_at", "desc")
+               ->offset($postsPerLoad * ($step - 1))
+               ->limit($postsPerLoad)
+               ->get();
+            return view("user.profile_tabs.profile_post_card")->with(["posts" => $posts]);
+         }
+      }
    }
 
    /**

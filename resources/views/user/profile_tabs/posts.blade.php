@@ -4,9 +4,11 @@
 @section("profileContent")
    <div class="mt-3" id="profileContent">
       @auth
-         <div class="mb-3">
-            <a href="#" id="newPostLink"><i class="far fa-plus-square"></i>&nbsp;New post...</a>
-         </div>
+         @insession($user->e_mail)
+            <div class="mb-3">
+               <a href="#" id="newPostLink"><i class="far fa-plus-square"></i>&nbsp;New post...</a>
+            </div>
+         @endinsession
 
          <!-- Button trigger new post modal window -->
          <button id="triggerNewPostModalButton" type="button" class="btn btn-primary" data-toggle="modal"
@@ -67,58 +69,62 @@
          <div id="modalDeletePostDiv"></div>
       @endauth
 
-      @forelse($posts as $post)
+      <div id="wall" name="wall"></div>
+
+      <!--
+      @/forelse($posts as $post)
          <div class="card bg-light mb-2">
             <div class="card-body">
-               <h5 class="card-title"><strong>{{ $post->title }}</strong></h5>
-               <p class="card-text mb-2">{{ $post->content }}</p>
+               <h5 class="card-title"><strong>{/{ $post->title }}</strong></h5>
+               <p class="card-text mb-2">{/{ $post->content }}</p>
                <div class="row">
                   <div class="col-9">
-                     <span class="badge badge-secondary font-weight-normal">{{ $post->created_at }}</span>
-                     @insession($user->e_mail)
-                        <span class="badge badge-primary font-weight-normal">{{ $post->postPermission->name }}</span>
-                     @endinsession
+                     <span class="badge badge-secondary font-weight-normal">{/{ $post->created_at }}</span>
+                     @/insession($user->e_mail)
+                        <span class="badge badge-primary font-weight-normal">{/{ $post->postPermission->name }}</span>
+                     @/endinsession
                   </div>
                   <div class="col-3 d-flex justify-content-end">
-                     @insession($user->e_mail)
-                        <a href="#" id="{{ $post->id }}" class="text-danger deletePostLink ml-3">
+                     @/insession($user->e_mail)
+                        <a href="#" id="{/{ $post->id }}" class="text-danger deletePostLink ml-3">
                            <i class="fas fa-lg fa-trash-alt mr-1" title="Delete post"></i>
                         </a>
-                        <a href="#" id="{{ $post->id }}" class="text-primary updatePostLink ml-3">
+                        <a href="#" id="{/{ $post->id }}" class="text-primary updatePostLink ml-3">
                            <i class="fas fa-lg fa-edit" title="Edit post"></i>
                         </a>
-                     @endinsession
-                     @auth
-                        @liked($post->id)
-                           <a href="#" id="{{ $post->id }}" class="text-success ml-3 undoLikePostLink">
-                        @else
-                           <a href="#" id="{{ $post->id }}" class="text-secondary likePostLink ml-3">
-                        @endliked
-                           <label id="{{ $post->id }}" class="likeNumber font-weight-bold">{{ $post->likes }}</label>
+                     @/endinsession
+                     @/auth
+                        @/liked($post->id)
+                           <a href="#" id="{/{ $post->id }}" class="text-success ml-3 undoLikePostLink">
+                        @/else
+                           <a href="#" id="{/{ $post->id }}" class="text-secondary likePostLink ml-3">
+                        @/endliked
+                           <label id="{/{ $post->id }}" class="likeNumber font-weight-bold">{/{ $post->likes }}</label>
                            <i class="fas fa-lg fa-thumbs-up" title="Like"></i>
                         </a>
-                        @disliked($post->id)
-                           <a href="#" id="{{ $post->id }}" class="text-danger ml-3 undoDislikePostLink">
-                        @else
-                           <a href="#" id="{{ $post->id }}" class="text-secondary dislikePostLink ml-3">
-                        @enddisliked
-                           <label id="{{ $post->id }}" class="dislikeNumber font-weight-bold">{{ $post->dislikes }}</label>
+                        @/disliked($post->id)
+                           <a href="#" id="{/{ $post->id }}" class="text-danger ml-3 undoDislikePostLink">
+                        @/else
+                           <a href="#" id="{/{ $post->id }}" class="text-secondary dislikePostLink ml-3">
+                        @/enddisliked
+                           <label id="{/{ $post->id }}" class="dislikeNumber font-weight-bold">{/{ $post->dislikes }}</label>
                            <i class="fas fa-lg fa-thumbs-down" title="Dislike"></i>
                         </a>
-                     @endauth
+                     @/endauth
                   </div>
                </div>
             </div>
          </div>
-      @empty
+      @/empty
          <div class="row justify-content-center">
-            @insession($user->e_mail)
+            @/insession($user->e_mail)
                <h5 class="mt-5 font-weight-bold">You don't have any post yet...!</h5>
-            @else
+            @/else
                <h5 class="mt-5 font-weight-bold">This user don't have any post yet...!</h5>
-            @endinsession
+            @/endinsession
          </div>
-      @endforelse
+      @/endforelse
+      -->
    </div>
 @endsection
 

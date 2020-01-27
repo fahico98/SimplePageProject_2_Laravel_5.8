@@ -1,19 +1,15 @@
 
+var step = 1;
+
 $(document).ready(function(){
 
-   loadPosts(1);
+   loadPosts();
    loadRecommended();
 
    $(window).scroll(function(){
-
-      /*
-      console.log("window scroll top: " + $(window).scrollTop() + ".\n");
-      console.log("document height: " + $(document).height() + ".\n");
-      console.log("window height: " + $(window).height() + ".\n");
-      */
-
-      if($(window).scrollTop() == $(document).height() - $(window).height()){
-
+      if($(window).scrollTop() == $(document).height() - $(window).height() && step > 0){
+         step++;
+         loadPosts();
       }
    });
 
@@ -166,19 +162,23 @@ function loadRecommended(){
    });
 }
 
-function loadPosts(step){
+function loadPosts(){
    $.ajaxSetup({
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
    });
    $.ajax({
-      url: "/load_posts?step=" + step,
+      url: "user/post/load_posts?step=" + step + "&tab=home",
       type: "GET",
       dataType: "html",
       processData: false,
       success: function(response){
-         $("#wall").append(response);
+         if(response != ""){
+            $("#wall").append(response);
+         }else{
+            step = -1;
+         }
       },
       async: false
    });

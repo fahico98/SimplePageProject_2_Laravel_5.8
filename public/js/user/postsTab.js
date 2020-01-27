@@ -1,5 +1,16 @@
 
+var step = 1;
+
 $(document).ready(function(){
+
+   loadPosts();
+
+   $(window).scroll(function(){
+      if($(window).scrollTop() == $(document).height() - $(window).height() && step > 0){
+         step++;
+         loadPosts();
+      }
+   });
 
    $(document).on("click", "#newPostLink", function(event){
       event.preventDefault();
@@ -131,6 +142,28 @@ $(document).ready(function(){
       undoDislike(id);
    });
 });
+
+function loadPosts(){
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax({
+      url: "/user/post/load_posts?step=" + step + "&tab=posts",
+      type: "GET",
+      dataType: "html",
+      processData: false,
+      success: function(response){
+         if(response != ""){
+            $("#wall").append(response);
+         }else{
+            step = -1;
+         }
+      },
+      async: false
+   });
+}
 
 function modalUpdateForm(id){
    $.ajaxSetup({

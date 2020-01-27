@@ -48,23 +48,9 @@ class HomeController extends Controller{
                ->limit(3)
                ->get();
          }
-         return view("user.profile_tabs.recommended_card")->with(["recommended" => $recommended]);
+         return (count($recommended) == 0) ?
+            "<strong>There are no recommended...!</strong>" :
+            view("user.profile_tabs.recommended_card")->with(["recommended" => $recommended]);
       }
    }
-
-   public function loadPosts(){
-      if(Auth::check()){
-         $postsPerLoad = 10;
-         $user = Auth::user();
-         $step = Input::get("step");
-         $posts = Post::whereIn("user_id", $user->following->pluck('id'))
-            ->orWhere("user_id", "=", $user->id)
-            ->orderBy("created_at", "desc")
-            ->offset($postsPerLoad * ($step - 1))
-            ->limit($postsPerLoad)
-            ->get();
-         return view("user.profile_tabs.post_card")->with(["posts" => $posts]);
-      }
-   }
-
 }
